@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1,
+h2 {
+  font-family: playFair;
+}
+
+label,
+btn {
+  font-family: sans-serif;
+}
+
+html {
+  --cursor-color: #4caf50;
+}
+
+html.dark-mode {
+  --cursor-color: #fff;
+}
+
+
+svg.star-svg{
+  display: inline;
+}
