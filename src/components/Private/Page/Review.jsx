@@ -52,7 +52,7 @@ const Review = () => {
     
     axios
       .put(
-        `http://localhost:5000/singleService/${loaderData._id}/review`,
+        `https://service-web-server.vercel.app/singleService/${loaderData._id}/review`,
         aaaaaa
       )
       .then((response) => {

@@ -17,7 +17,7 @@ export default function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/limitService")
+      .get("https://service-web-server.vercel.app/limitService")
       .then((response) => {
         setService(response.data); // Access the data
       })

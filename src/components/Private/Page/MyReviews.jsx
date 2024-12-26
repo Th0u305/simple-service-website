@@ -21,7 +21,7 @@ const MyReviews = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/allService")
+      .get("https://service-web-server.vercel.app/allService")
       .then((response) => {
         setService(
           response.data.filter(
@@ -64,7 +64,7 @@ const MyReviews = () => {
       });
 
       axios
-        .put(`http://localhost:5000/deleteReview/${data.id}`, { index })
+        .put(`https://service-web-server.vercel.app/deleteReview/${data.id}`, { index })
         .then((response) => console.log("Success:", response.data))
         .catch((error) => console.error("Error:", error));
 

@@ -62,7 +62,7 @@ const AddService = () => {
     );
 
     axios
-      .post("http://localhost:5000/addService", filterEmptyFields)
+      .post("https://service-web-server.vercel.app/addService", filterEmptyFields)
       .then((response) => {        
         if (parseFloat(response.data.insertedId) > 0) {
           toast.success("Successfully Added service");

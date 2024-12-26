@@ -11,7 +11,7 @@ const MyPostedJobs = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/allService")
+      .get("https://service-web-server.vercel.app/allService")
       .then((response) => {
         setService(response.data.filter(item => (item.myService === true) && (item.email === user.email)))      
       })
@@ -27,7 +27,7 @@ const MyPostedJobs = () => {
     setService(service.filter(item => item._id !== id))
     
     axios
-      .delete(`http://localhost:5000/deleteService/${id}`)
+      .delete(`https://service-web-server.vercel.app/deleteService/${id}`)
       .then((response) => {        
         if (response.data.deletedCount > 0) {
           toast.success("Successfully Deleted service");

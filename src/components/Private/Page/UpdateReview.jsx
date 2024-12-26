@@ -23,7 +23,7 @@ const UpdateReview = () => {
   const [index, setIndex] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/allService").then((response) => {
+    axios.get("https://service-web-server.vercel.app/allService").then((response) => {
       setService(
         response.data.filter(
           (item) => item.myService === true && item.email === user.email
@@ -82,7 +82,7 @@ const UpdateReview = () => {
     );
 
     axios
-      .put(`http://localhost:5000/updateReviews/${pathname.split("/")[2]}`, {
+      .put(`https://service-web-server.vercel.app/updateReviews/${pathname.split("/")[2]}`, {
         filterEmptyFields,
         index,
       })

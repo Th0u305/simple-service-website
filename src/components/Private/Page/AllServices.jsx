@@ -32,7 +32,7 @@ const AllServices = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/limitService")
+      .get("https://service-web-server.vercel.app/limitService")
       .then((response) => {
         setService(response.data); // Access the data
       })
@@ -41,7 +41,7 @@ const AllServices = () => {
       });
 
     axios
-      .get("http://localhost:5000/category")
+      .get("https://service-web-server.vercel.app/category")
       .then((response) => {
         setCategory(response.data); // Access the data
       })
@@ -52,7 +52,7 @@ const AllServices = () => {
 
   const sendCat = (id) => {
     axios
-      .get(`http://localhost:5000/service/search?filter=${id}`)
+      .get(`https://service-web-server.vercel.app/service/search?filter=${id}`)
       .then((response) => {
         setSelectedCategory(response.data); // Access the data
       })
@@ -63,7 +63,7 @@ const AllServices = () => {
 
   const handleSearch =(data)=>{    
     axios
-    .get(`http://localhost:5000/service/search?filter=&search=${data}`)
+    .get(`https://service-web-server.vercel.app/service/search?filter=&search=${data}`)
     .then((response) => {
       setSelectedCategory(response.data);            
     })

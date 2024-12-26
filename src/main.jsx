@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/service/:${params}`),
+          fetch(`https://service-web-server.vercel.app/service/:${params}`),
       },
       {
         path: "/home",
@@ -89,8 +89,6 @@ const router = createBrowserRouter([
       {
         path : "/updateReview/:id/:id",
         element : <PrivateRoute><UpdateReview></UpdateReview></PrivateRoute>,
-        // loader: ({ params }) =>
-        //   fetch(`http://localhost:5000/updateReviews/${params.id}`),
       },
       {
         path: "service/:id",
@@ -100,19 +98,19 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/singleService/${params.id}`),
+          fetch(`https://service-web-server.vercel.app/singleService/${params.id}`),
       },
       { 
         path: "service/:id/review", 
         element: <PrivateRoute><Review></Review></PrivateRoute> ,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/singleService/${params.id}`),
+          fetch(`https://service-web-server.vercel.app/singleService/${params.id}`),
       },
       { 
         path: "service/update/:id", 
         element: <PrivateRoute><UpdateService></UpdateService></PrivateRoute> ,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/singleService/update/${params.id}`),
+          fetch(`https://service-web-server.vercel.app/singleService/update/${params.id}`),
       },
       {
         path: "dashboard",

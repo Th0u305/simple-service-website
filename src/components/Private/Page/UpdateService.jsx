@@ -53,7 +53,7 @@ const UpdateService = () => {
 
     axios
       .put(
-        `http://localhost:5000/singleService/update/${loaderData._id}`,
+        `https://service-web-server.vercel.app/singleService/update/${loaderData._id}`,
         filterEmptyFields
       )
       .then((response) => {
