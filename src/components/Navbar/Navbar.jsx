@@ -9,7 +9,6 @@ import { MdOutlineAttachMoney } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
 import { FaLifeRing } from "react-icons/fa";
 
-
 import {
   Navbar,
   NavbarBrand,
@@ -68,18 +67,31 @@ export default function App() {
         </div>
         <NavbarBrand className="hidden lg:flex gap-2">
           <img src={logoNav} className="w-8" alt="" />
-          <a href="/" className="font-bold text-inherit">TrustWise</a>
+          <a href="/" className="font-bold text-inherit">
+            TrustWise
+          </a>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="" justify="center">
         <NavbarBrand className="lg:hidden gap-2">
           <img src={logoNav} className="w-8" alt="" />
-          <a href="/" className="font-bold text-inherit">TrustWise</a>
+          <a href="/" className="font-bold text-inherit">
+            TrustWise
+          </a>
         </NavbarBrand>
         <div className="hidden lg:flex gap-5 justify-center items-center">
           <NavbarItem>
-            <Link className="text-lg" color="foreground" href="/">
+            <Link
+              className="text-lg"
+              color="foreground"
+              href="/"
+              onPress={() =>
+                myRef.current?.scrollIntoView({
+                  behavior: "smooth",
+                })
+              }
+            >
               Home
             </Link>
           </NavbarItem>
@@ -131,6 +143,11 @@ export default function App() {
                     color="foreground"
                     aria-current="page"
                     href="/addService"
+                    onPress={() =>
+                      myRef.current?.scrollIntoView({
+                        behavior: "smooth",
+                      })
+                    }
                   >
                     Add Service
                   </Link>
@@ -142,6 +159,11 @@ export default function App() {
                     color="foreground"
                     aria-current="page"
                     href="/myReviews"
+                    onPress={() =>
+                      myRef.current?.scrollIntoView({
+                        behavior: "smooth",
+                      })
+                    }
                   >
                     My Reviews
                   </Link>
@@ -153,6 +175,11 @@ export default function App() {
                     color="foreground"
                     aria-current="page"
                     href="/myService"
+                    onPress={() =>
+                      myRef.current?.scrollIntoView({
+                        behavior: "smooth",
+                      })
+                    }
                   >
                     My Services
                   </Link>
@@ -162,12 +189,30 @@ export default function App() {
           </NavbarContent>
 
           <NavbarItem>
-            <Link className="text-lg" color="foreground" href="/contact">
+            <Link
+              className="text-lg"
+              color="foreground"
+              href="/contact"
+              onPress={() =>
+                myRef.current?.scrollIntoView({
+                  behavior: "smooth",
+                })
+              }
+            >
               Contact
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link className="text-lg" color="foreground" href="/about">
+            <Link
+              className="text-lg"
+              color="foreground"
+              href="/about"
+              onPress={() =>
+                myRef.current?.scrollIntoView({
+                  behavior: "smooth",
+                })
+              }
+            >
               About us
             </Link>
           </NavbarItem>
@@ -226,25 +271,26 @@ export default function App() {
               </p>
             </DropdownItem>
             <DropdownItem key="system" href="/dashboard">
-            <p className="flex justify-start items-center gap-2">
+              <p className="flex justify-start items-center gap-2">
                 <IoMdSettings className="text-xl"></IoMdSettings>
                 Settings
               </p>
             </DropdownItem>
             <DropdownItem key="configurations" href="/dashboard">
-            <p className="flex justify-start items-center gap-2">
+              <p className="flex justify-start items-center gap-2">
                 <MdOutlineAttachMoney className="text-xl text-green-600"></MdOutlineAttachMoney>
                 Billings
               </p>
             </DropdownItem>
-            <DropdownItem key="help_and_feedback">    <p className="flex justify-start items-center gap-2">
+            <DropdownItem key="help_and_feedback">
+              {" "}
+              <p className="flex justify-start items-center gap-2">
                 <FaLifeRing className="text-xl text-yellow-800"></FaLifeRing>
                 Help & Feedback
-              </p></DropdownItem>
-            <DropdownItem
-              onPress={handleSignOutUser}
-            >
-                  <p className="flex justify-center items-center gap-2 bg-red-100 p-3 rounded-2xl">
+              </p>
+            </DropdownItem>
+            <DropdownItem onPress={handleSignOutUser}>
+              <p className="flex justify-center items-center gap-2 bg-red-100 p-3 rounded-2xl">
                 <MdLogout className="text-xl text-red-600"></MdLogout>
                 Log out
               </p>

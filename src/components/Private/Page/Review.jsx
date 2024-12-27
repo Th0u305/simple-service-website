@@ -24,34 +24,37 @@ const Review = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (e) => {    
+  const onSubmit = (e) => {
     const split = e.postedDate.split("-");
-    
+
     if (e.reviewText.length < 10) {
       return setErrorMsg2("Please write more than 10 words");
     } else {
       setErrorMsg2("");
     }
-    
 
-    if (parseFloat(split[0]) !== currentYear && parseFloat(split[1]) !== month && parseFloat(split[2] !== day)) {
+    if (
+      parseFloat(split[0]) !== currentYear &&
+      parseFloat(split[1]) !== month &&
+      parseFloat(split[2] !== day)
+    ) {
       return setErrorMsg("Please select the correct year date or month");
     } else {
       setErrorMsg("");
     }
 
     const aaaaaa = {
-      id : loaderData._id,
+      id: loaderData._id,
       reviewText: e.reviewText,
       rating: rated + 0.5,
       userName: user.displayName,
       userPhoto: user.photoURL,
       postedDate: e.postedDate,
       email: user.email,
-      serviceTitle : loaderData.title,
-      serviceImage : loaderData.image
+      serviceTitle: loaderData.title,
+      serviceImage: loaderData.image,
     };
-        
+
     axios
       .put(
         `https://service-web-server.vercel.app/singleService/${loaderData._id}/review`,
@@ -65,7 +68,7 @@ const Review = () => {
       .catch((error) => {
         return console.error("Error adding service:", error);
       });
-      reset();
+    reset();
   };
 
   return (

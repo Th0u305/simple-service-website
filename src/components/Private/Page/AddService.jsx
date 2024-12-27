@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 
 const AddService = () => {
   const variants = ["bordered"];
-  const { user } = useContext(AuthContext);
+  const { user, myRef } = useContext(AuthContext);
   const [errorMsg, setErrorMsg] = useState("");
   const [errorMsg2, setErrorMsg2] = useState("");
   const [errorMsg3, setErrorMsg3] = useState("");
@@ -115,7 +115,7 @@ const AddService = () => {
       <Helmet>
         <title>TrustWise | Add Service</title>
       </Helmet>
-      <section className="bg-[#f8f4f4] dark:bg-gray-900 mt-12 rounded-2xl border-2 border-gray-500">
+      <section className="bg-[#f8f4f4] dark:bg-gray-900 mt-12 rounded-2xl border-2 border-gray-500" ref={myRef}>
         <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
           <h4 className="mb-12 text-2xl md:text-4xl font-bold text-gray-900 dark:text-white text-center">
             Add Service

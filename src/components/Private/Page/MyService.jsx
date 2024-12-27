@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 
 const MyPostedJobs = () => {
-  const { user } = useContext(AuthContext);
+  const { user , myRef} = useContext(AuthContext);
   const [service, setService] = useState([]);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const MyPostedJobs = () => {
   };
 
   return (
-    <section className="container px-4 mx-auto pt-12">
+    <section className="container px-4 mx-auto pt-12" ref={myRef}>
       <Helmet>
         <title>TrustWise | My Services</title>
       </Helmet>
