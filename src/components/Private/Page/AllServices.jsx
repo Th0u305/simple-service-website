@@ -91,7 +91,7 @@ const AllServices = () => {
   const handlePage = (page) => {
     axios
       .get(
-        `http://localhost:5000/service/search/page?page=${page}&limit=${limit}`
+        `https://service-web-server.vercel.app/service/search/page?page=${page}&limit=${limit}`
       )
       .then((response) => {
         setSelectedCategory(response.data);

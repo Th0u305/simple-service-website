@@ -21,7 +21,7 @@ const MyReviews = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/allService")
+      .get("https://service-web-server.vercel.app/allService")
       .then((response) => {
         const ppppp = response.data.map((item) =>
           item.reviews.filter((item2) => item2.email === user.email)
