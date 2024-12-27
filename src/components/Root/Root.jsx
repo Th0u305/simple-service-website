@@ -46,7 +46,7 @@ const Root = () => {
 
   return (
     <NextUIProvider>
-      <div className="">
+      <div>
         <Helmet></Helmet>
         <Toaster />
         <Navbar></Navbar>

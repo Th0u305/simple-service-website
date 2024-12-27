@@ -2,8 +2,8 @@ import React from "react";
 import Marquee from "react-fast-marquee";
 
 const Marquee2 = () => (
-  <div className="mt-16">
-    <h4 className="text-center text-3xl mb-12">Meet Our Partners</h4>
+  <div className="">
+    <h4 className="text-center text-2xl md:text-3xl lg:text-4xl mb-12">Meet Our Partners</h4>
     <Marquee gradient={true} gradientColor="#eee">
       <div className="flex items-center w-screen justify-around">
         <div>
