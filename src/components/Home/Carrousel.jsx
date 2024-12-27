@@ -3,7 +3,7 @@ import { Carousel } from "@material-tailwind/react";
 
 const Carrousel = () => {
   return (
-    <div className="h-[100vh] bg-[#00000060]">
+    <div className="h-[100vh] bg-[#00000079]">
       <Carousel
         autoplay="true"
         autoplayDelay={5000}
@@ -39,9 +39,9 @@ const Carrousel = () => {
           className="h-full w-full object-cover"
         />
       </Carousel>
-      <div className="text-5xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  z-20 text-white text-center space-y-5">
-        <h1>Discover the Best Services Around You</h1>
-        <h2> Real Opinions, Real Impact</h2>
+      <div className="absolute top-1/2 w-[80%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center space-y-5">
+        <h4 className="text-3xl md:text-4xl">Discover the Best Services Around You</h4>
+        <h4 className="text-lg md:text-xl"> Real Opinions, Real Impact</h4>
       </div>
     </div>
   );

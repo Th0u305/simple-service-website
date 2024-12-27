@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Button, Input, Textarea } from "@nextui-org/react";
-import { Rating, Typography } from "@material-tailwind/react";
+import { Rating } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router-dom";
 import axios from "axios";
@@ -24,7 +24,7 @@ const Review = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (e) => {
+  const onSubmit = (e) => {    
     const split = e.postedDate.split("-");
     
     if (e.reviewText.length < 10) {
@@ -47,9 +47,11 @@ const Review = () => {
       userName: user.displayName,
       userPhoto: user.photoURL,
       postedDate: e.postedDate,
-      email: user.email
+      email: user.email,
+      serviceTitle : loaderData.title,
+      serviceImage : loaderData.image
     };
-    
+        
     axios
       .put(
         `https://service-web-server.vercel.app/singleService/${loaderData._id}/review`,

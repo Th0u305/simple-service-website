@@ -13,6 +13,7 @@ import { firebaseAuth } from "../firebase/firebase.config";
 export const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
 import { useRef } from 'react';
+import axios from "axios";
 
 const ContextProvider = ({ children }) => {
 
@@ -39,8 +40,14 @@ const ContextProvider = ({ children }) => {
 
   // check for current logged user
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(firebaseAuth, (currentUser) => {
-      setUser(currentUser);
+    const unSubscribe = onAuthStateChanged(firebaseAuth, async (currentUser) => {
+      if (currentUser?.email) {
+        setUser(currentUser);
+        const {data} = await axios.post ('http://localhost:5000/jwt', {email:currentUser?.email}, {withCredentials : true})
+      }else{
+        setUser(currentUser)
+        const {data} = await axios.get ('http://localhost:5000/logout', {withCredentials : true})
+      }
       setLoading(false)
     });
     return () => {

@@ -27,7 +27,7 @@ const Contact = () => {
   return (
     <section className="bg-[#37474F] dark:bg-gray-900 mt-28 mb-28 rounded-2xl w-[87%] mx-auto" ref={myRef}>
       <Helmet>
-        <title>EcoVenture | Contact</title>
+        <title>TrustWise | Contact</title>
       </Helmet>
       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md ">
         <h2 className="text-white mb-4 text-3xl lg:text-5xl tracking-tight font-semibold text-center dark:text-white">

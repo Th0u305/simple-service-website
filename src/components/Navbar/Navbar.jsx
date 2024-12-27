@@ -1,15 +1,20 @@
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import logoNav from "../../assets/working.png";
+import { FaUser } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
+import { IoMdSettings } from "react-icons/io";
+import { MdOutlineAttachMoney } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
+import { FaLifeRing } from "react-icons/fa";
+
 
 import {
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
   Link,
   Button,
   DropdownItem,
@@ -36,9 +41,11 @@ export const AcmeLogo = () => {
 
 export default function App() {
   const { user, signOutUser } = useContext(AuthContext);
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const handleSignOutUser = () => {
+    if (!user && !user?.email) {
+      return toast.error("You're Not Logged In");
+    }
     signOutUser()
       .then(() => {
         if (user) {
@@ -52,24 +59,23 @@ export default function App() {
 
   return (
     <Navbar
-      onMenuOpenChange={setIsMenuOpen}
       maxWidth="full"
-      className="rounded-xl container mx-auto fixed top-12 z-50 shadow"
+      className="rounded-xl container mx-auto fixed top-12 z-50 shadow w-[95%]"
     >
       <NavbarContent className="">
         <div className="flex justify-center items-center lg:hidden">
           <NestedMenu></NestedMenu>
         </div>
-        <NavbarBrand className="hidden lg:flex">
-          <AcmeLogo />
-          <p className="font-bold text-inherit">TrustWise</p>
+        <NavbarBrand className="hidden lg:flex gap-2">
+          <img src={logoNav} className="w-8" alt="" />
+          <a href="/" className="font-bold text-inherit">TrustWise</a>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="" justify="center">
-        <NavbarBrand className="lg:hidden">
-          <AcmeLogo />
-          <p className="font-bold text-inherit">TrustWise</p>
+        <NavbarBrand className="lg:hidden gap-2">
+          <img src={logoNav} className="w-8" alt="" />
+          <a href="/" className="font-bold text-inherit">TrustWise</a>
         </NavbarBrand>
         <div className="hidden lg:flex gap-5 justify-center items-center">
           <NavbarItem>
@@ -109,6 +115,11 @@ export default function App() {
                     color="foreground"
                     aria-current="page"
                     href="/services"
+                    onPress={() =>
+                      myRef.current?.scrollIntoView({
+                        behavior: "smooth",
+                      })
+                    }
                   >
                     All Services
                   </Link>
@@ -186,26 +197,57 @@ export default function App() {
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2">
-              <p className="font-semibold">{user?.displayName}</p>
-              <p className="font-semibold">{user?.email}</p>
+            <DropdownItem key="profile" className="">
+              <p className="font-semibold">
+                <Avatar
+                  isBordered
+                  as="button"
+                  className="transition-transform"
+                  color="secondary"
+                  name={user?.displayName}
+                  size="sm"
+                  src={user?.photoUrl}
+                />
+              </p>
+              <p className="font-semibold mt-3">
+                {user?.email || "example@gmail.com"}
+              </p>
             </DropdownItem>
-            <DropdownItem key="settings" href="dashboard/profile">
-              My profile
+            <DropdownItem key="settings" href="/dashboard">
+              <p className="flex justify-start items-center gap-2">
+                <FaUser className="text-xl"></FaUser>
+                My profile
+              </p>
             </DropdownItem>
-            <DropdownItem key="system" href="/dashboard/billing">
-              Settings
+            <DropdownItem key="settings" href="/dashboard">
+              <p className="flex justify-start items-center gap-2">
+                <MdDashboard className="text-xl text-blue-500"></MdDashboard>
+                Dashboard
+              </p>
             </DropdownItem>
-            <DropdownItem key="configurations" href="/dashboard/billing">
-              Billings
+            <DropdownItem key="system" href="/dashboard">
+            <p className="flex justify-start items-center gap-2">
+                <IoMdSettings className="text-xl"></IoMdSettings>
+                Settings
+              </p>
             </DropdownItem>
-            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
+            <DropdownItem key="configurations" href="/dashboard">
+            <p className="flex justify-start items-center gap-2">
+                <MdOutlineAttachMoney className="text-xl text-green-600"></MdOutlineAttachMoney>
+                Billings
+              </p>
+            </DropdownItem>
+            <DropdownItem key="help_and_feedback">    <p className="flex justify-start items-center gap-2">
+                <FaLifeRing className="text-xl text-yellow-800"></FaLifeRing>
+                Help & Feedback
+              </p></DropdownItem>
             <DropdownItem
-              key="logout"
-              color="danger"
               onPress={handleSignOutUser}
             >
-              Log Out
+                  <p className="flex justify-center items-center gap-2 bg-red-100 p-3 rounded-2xl">
+                <MdLogout className="text-xl text-red-600"></MdLogout>
+                Log out
+              </p>
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>

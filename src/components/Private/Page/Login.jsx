@@ -22,6 +22,11 @@ const Login = () => {
   const { state } = useLocation();
 
   const googlePopUp = () => {
+    console.log(state);
+    
+    if (user && user?.email) {
+    return toast.error("You're Already Logged In")
+    }
     signInWithGoogle()
       .then((result) => {
         setUser(result.user);
@@ -69,11 +74,11 @@ const Login = () => {
   };
 
   return (
-    <div className="font-[sans-serif] p-8 xl:mt-0" ref={myRef}>
+    <div className="font-[sans-serif] p-8 xl:mt-0 " ref={myRef}>
       <Helmet>
-        <title>EcoVenture | Login</title>
+        <title>TrustWise | Login</title>
       </Helmet>
-      <div className="min-h-screen flex flex-col items-center justify-end md:justify-center xl:justify-end ">
+      <div className="min-h-screen flex flex-col items-center justify-end md:justify-center xl:justify-end mt-32 lg:mt-24 xl:mt-0">
         <div className="bg-white grid md:grid-cols-2 items-center gap-4 max-md:gap-8 max-w-6xl max-md:max-w-lg w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
           <div className="md:max-w-md w-full px-4 py-4">
             <form onSubmit={handleLogin}>

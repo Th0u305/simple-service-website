@@ -56,9 +56,9 @@ const Register = () => {
       ref={myRef}
     >
       <Helmet>
-        <title>EcoVenture | Register</title>
+        <title>TrustWise | Register</title>
       </Helmet>
-      <div className="w-full max-w-4xl max-md:max-w-xl mx-auto">
+      <div className="w-full max-w-4xl max-md:max-w-xl mx-auto mt-32 xl:mt-0">
         <div className="bg-white grid md:grid-cols-2 gap-16 w-full sm:p-8 p-6 shadow-md rounded-md overflow-hidden">
           <div className="max-md:order-1 space-y-6">
             <div className="md:mb-16 mb-8">

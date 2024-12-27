@@ -7,10 +7,12 @@ import {
   MenuItem,
   Button,
 } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
 export function NestedMenu() {
   const [openMenu, setOpenMenu] = React.useState(false);
   const [openMenu2, setOpenMenu2] = React.useState(true);
+  const navigate = useNavigate()
 
   return (
     <Menu>
@@ -53,9 +55,8 @@ export function NestedMenu() {
           )}
         </button>
       </MenuHandler>
-      <MenuList className="ml-14 mt-5">
-        <MenuItem>Menu Item 1</MenuItem>
-        <MenuItem>Menu Item 2</MenuItem>
+      <MenuList className="ml-2 md:ml-6 mt-5">
+        <MenuItem onClick={() => navigate("/")}>Home</MenuItem>
         <Menu
           placement="right-start"
           open={openMenu}
@@ -65,7 +66,7 @@ export function NestedMenu() {
         >
           <MenuHandler className="flex items-center justify-between">
             <MenuItem>
-              Nested Item
+              Service
               <ChevronUpIcon
                 strokeWidth={2.5}
                 className={`h-3.5 w-3.5 transition-transform ${
@@ -75,15 +76,15 @@ export function NestedMenu() {
             </MenuItem>
           </MenuHandler>
           <MenuList>
-            <MenuItem>Nested Item 1</MenuItem>
-            <MenuItem>Nested Item 2</MenuItem>
-            <MenuItem>Nested Item 3</MenuItem>
+            <MenuItem onClick={() => navigate("/services")}> All Services</MenuItem>
+            <MenuItem onClick={() => navigate("/addService")}> Add Service</MenuItem>
+            <MenuItem onClick={() => navigate("/myReviews")}> My Reviews</MenuItem>
+            <MenuItem onClick={() => navigate("/myService")}> My Services</MenuItem>
           </MenuList>
         </Menu>
-        <MenuItem>Menu Item 3</MenuItem>
-        <Button href="/login">
-          Login
-        </Button>
+        <MenuItem onClick={() => navigate("/contact")}>Contact</MenuItem>
+        <MenuItem onClick={() => navigate("/about")}> About us</MenuItem>
+        <Button onClick={() => navigate("/login")}>Login</Button>
       </MenuList>
     </Menu>
   );

@@ -8,7 +8,7 @@ const About = () => {
   return (
     <div className="space-y-8 mt-28 w-[85%] mx-auto" ref={myRef}>
       <Helmet>
-        <title>EcoVenture | About</title>
+        <title>TrustWise | About</title>
       </Helmet>
       <div className="space-y-5 text-center">
         <h1 className=" text-3xl lg:text-5xl font-semibold">About Us</h1>

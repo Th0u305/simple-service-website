@@ -6,14 +6,17 @@ import {
   Image,
   Spinner,
 } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Marquee2 from "./Marquee";
+import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../Context/ContextProvider";
 
 export default function App() {
   const [service, setService] = useState([]);
   const navigate = useNavigate();
+  const {myRef} = useContext(AuthContext);
 
   useEffect(() => {
     axios
@@ -31,9 +34,12 @@ export default function App() {
   };
 
   return (
-    <div className="mt-20">
-      <h1 className="text-center text-5xl">Honest Reviews, Trusted Insights</h1>
-      <div className="gap-5 grid grid-cols-2 sm:grid-cols-3 mt-20">
+    <div className="mt-20" ref={myRef}>
+      <Helmet>
+        <title>TrustWise | Home</title>
+      </Helmet>
+      <h4 className="text-center text-5xl">Honest Reviews, Trusted Insights</h4>
+      <div className="gap-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 mt-20">
         {service.length > 0 ? (
           service.map((item, index) => (
             <Card
@@ -47,22 +53,19 @@ export default function App() {
                   className="w-full object-cover h-[140px]"
                   radius="lg"
                   shadow="sm"
-                  src={item.image }
+                  src={item.image}
                   width="100%"
                 />
               </CardBody>
               <CardFooter className="text-small justify-between">
-                <b className="font-semibold">
-                  {item.title }
-                </b>
-                <p className="text-default-500">
-                  {item.price }
-                </p>
+                <b className="font-semibold">{item.title}</b>
+                <p className="text-default-500">{item.price}</p>
               </CardFooter>
               <Button
                 onPress={() => handleChange(item)}
                 size="sm"
                 className="mx-auto mb-4"
+                color="primary" variant="bordered"
               >
                 View details
               </Button>
