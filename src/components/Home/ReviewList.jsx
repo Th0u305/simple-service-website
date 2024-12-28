@@ -41,16 +41,16 @@ export function TestimonialCard({ service2 }) {
               <Avatar
                 size="lg"
                 variant="circular"
-                src={item.userPhoto}
+                src={item?.userPhoto}
                 alt="tania andrew"
               />
               <div className="flex flex-col gap-0.5 ">
                 <div className="">
                   <Typography variant="h5" color="blue-gray">
-                    {item.userName}
+                    {item?.userName}
                   </Typography>
                   <div className="5 flex items-center gap-0">
-                    <Rating value={item.rating} readonly />
+                    <Rating value={item?.rating} readonly />
                   </div>
                 </div>
               </div>
@@ -58,7 +58,7 @@ export function TestimonialCard({ service2 }) {
             <CardBody className="mb-6 p-0">
               <Typography className="">
                 <p className=" whitespace-nowrap overflow-hidden text-ellipsis break-words w-72">
-                  {item.reviewText}
+                  {item?.reviewText}
                 </p>
               </Typography>
             </CardBody>

@@ -16,7 +16,6 @@ import { AuthContext } from "../Context/ContextProvider";
 import { TestimonialCard } from "./ReviewList";
 import BlurCard from "./Cards";
 
-
 export default function App() {
   const [service, setService] = useState([]);
   const [service2, setService2] = useState([]);
@@ -25,17 +24,9 @@ export default function App() {
 
   useEffect(() => {
     axios
-      .get("https://service-web-server.vercel.app/limitService")
-      .then((response) => {
-        setService(response.data); // Access the data
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-
-    axios
       .get("https://service-web-server.vercel.app/allService")
       .then((response) => {
+        setService(response.data.sort(() => Math.random() - 0.5).slice(0, 12));
         const data2 = response.data
           .map((item) => item.reviews.find((item2) => item2.userName))
           .filter(Boolean);
@@ -56,7 +47,9 @@ export default function App() {
       <Helmet>
         <title>TrustWise | Home</title>
       </Helmet>
-      <h4 className="text-center text-2xl md:text-3xl lg:text-4xl">Honest Reviews, Trusted Insights</h4>
+      <h4 className="text-center text-2xl md:text-3xl lg:text-4xl">
+        Honest Reviews, Trusted Insights
+      </h4>
       <div className="gap-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-20">
         {service?.length > 0 ? (
           service?.map((item, index) => (
@@ -95,8 +88,10 @@ export default function App() {
         )}
       </div>
       <BlurCard service2={service2}></BlurCard>
-      <Marquee2></Marquee2>
-      <h4 className="text-2xl md:text-3xl lg:text-4xl text-center mt-28 mb-12">Recent Reviews</h4>
+      {/* <Marquee2></Marquee2> */}
+      <h4 className="text-2xl md:text-3xl lg:text-4xl text-center mt-28 mb-12">
+        Recent Reviews
+      </h4>
       <TestimonialCard service2={service2}></TestimonialCard>
     </div>
   );

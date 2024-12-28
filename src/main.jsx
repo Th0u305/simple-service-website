@@ -64,17 +64,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/services",
+        element: <AllServices></AllServices>,
+      },
+      {
+        path: "/myService",
         element: (
-            <AllServices></AllServices>
+          <PrivateRoute>
+            <MyService></MyService>
+          </PrivateRoute>
         ),
       },
       {
-        path : "/myService",
-        element : <PrivateRoute><MyService></MyService></PrivateRoute>
-      },
-      {
-        path : "/myReviews",
-        element : <PrivateRoute><MyReviews></MyReviews></PrivateRoute>
+        path: "/myReviews",
+        element: (
+          <PrivateRoute>
+            <MyReviews></MyReviews>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/addService",
@@ -85,8 +91,12 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path : "/updateReview/:id/:id",
-        element : <PrivateRoute><UpdateReview></UpdateReview></PrivateRoute>,
+        path: "/updateReview/:id/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateReview></UpdateReview>
+          </PrivateRoute>
+        ),
       },
       {
         path: "service/:id",
@@ -96,19 +106,33 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://service-web-server.vercel.app/singleService/${params.id}`),
+          fetch(
+            `https://service-web-server.vercel.app/singleService/${params.id}`
+          ),
       },
-      { 
-        path: "service/:id/review", 
-        element: <PrivateRoute><Review></Review></PrivateRoute> ,
+      {
+        path: "service/:id/review",
+        element: (
+          <PrivateRoute>
+            <Review></Review>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
-          fetch(`https://service-web-server.vercel.app/singleService/${params.id}`),
+          fetch(
+            `https://service-web-server.vercel.app/singleService/${params.id}`
+          ),
       },
-      { 
-        path: "service/update/:id", 
-        element: <PrivateRoute><UpdateService></UpdateService></PrivateRoute> ,
+      {
+        path: "service/update/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateService></UpdateService>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
-          fetch(`https://service-web-server.vercel.app/singleService/update/${params.id}`),
+          fetch(
+            `https://service-web-server.vercel.app/singleService/update/${params.id}`
+          ),
       },
       {
         path: "dashboard",

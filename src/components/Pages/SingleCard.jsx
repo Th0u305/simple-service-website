@@ -29,27 +29,27 @@ export default function App() {
           <Image
             alt="Card background"
             className="object-cover rounded-xl"
-            src={loaderData.image || loaderData?.data.image}
+            src={loaderData?.image}
           />
         </CardBody>
         <CardHeader className="px-0 gap-3 flex-col items-start">
           <h4 className="font-semibold text-large">
-            {loaderData.title || loaderData?.data.title}
+            {loaderData?.title}
           </h4>
           <p className="">
-            Category: {loaderData.category || loaderData?.data.category}
+            Category: {loaderData?.category }
           </p>
           <p className="">
-            Category: {loaderData.company || loaderData?.data.company}
+            Category: {loaderData?.company}
           </p>
           <p className="">
-            Website: {loaderData.website || loaderData?.data.website}
+            Website: {loaderData?.website}
           </p>
           <p className="">
-            Added Date: {loaderData.addedDate || loaderData?.data.addedDate}
+            Added Date: {loaderData?.addedDate}
           </p>
           <p className="">
-            Price: {loaderData.price || loaderData?.data.price}
+            Price: {loaderData?.price}
           </p>
           <div className="flex items-center gap-2 font-bold text-blue-gray-500">
             {rated}.5
@@ -57,7 +57,7 @@ export default function App() {
           </div>
           <p className="break-all break-words max-w-xl">
             Description:{" "}
-            {loaderData.description || loaderData?.data.description}
+            {loaderData.description}
           </p>
         </CardHeader>
       </div>
@@ -69,14 +69,14 @@ export default function App() {
             <CardHeader className="flex-col items-start px-0">
               <User
                 avatarProps={{
-                  src: `${item.userPhoto}`,
+                  src: `${item?.userPhoto}`,
                 }}
-                name={item.userName}
+                name={item?.userName}
               />
             </CardHeader>
-            <p className="">Post Date: {item.postedDate}</p>
-            <p className="">Rating: {item.rating}</p>
-            <p className="break-all break-words max-w-xl">Review: {item.reviewText}</p>
+            <p className="">Post Date: {item?.postedDate}</p>
+            <p className="">Rating: {item?.rating}</p>
+            <p className="break-all break-words max-w-xl">Review: {item?.reviewText}</p>
             <CardBody className="overflow-visible py-2"></CardBody>
             <hr />
           </div>

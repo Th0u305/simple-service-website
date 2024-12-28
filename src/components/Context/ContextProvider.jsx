@@ -40,7 +40,7 @@ const ContextProvider = ({ children }) => {
 
   // check for current logged user
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(firebaseAuth, async (currentUser) => {
+    const unSubscribe = onAuthStateChanged(firebaseAuth, async (currentUser) => {      
       if (currentUser?.email) {
         setUser(currentUser);
         const {data} = await axios.post ('https://service-web-server.vercel.app/jwt', {email:currentUser?.email}, {withCredentials : true})

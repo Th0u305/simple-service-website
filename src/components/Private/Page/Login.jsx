@@ -22,7 +22,6 @@ const Login = () => {
   const { state } = useLocation();
 
   const googlePopUp = () => {
-    console.log(state);
     
     if (user && user?.email) {
     return toast.error("You're Already Logged In")

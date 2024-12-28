@@ -15,10 +15,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../Context/ContextProvider";
 import { Helmet } from "react-helmet-async";
-import errorImage from "../../../assets/404.png";
 
 const AllServices = () => {
-  const [service, setService] = useState([]);
   const navigate = useNavigate();
   const { setDeleteReview, myRef } = useContext(AuthContext);
   const [category, setCategory] = useState([]);
@@ -26,6 +24,7 @@ const AllServices = () => {
   const [message, setMessage] = useState([]);
   const [loading, setLoading] = useState(true);
   const [price, setPrice] = useState([]);
+  const [pageNumber, setPageNumber] = useState([]);
   const limit = 12;
 
   const handleChange = (item) => {
@@ -33,18 +32,17 @@ const AllServices = () => {
     setDeleteReview(item._id);
   };
 
-  // const aaaaaaaaa = [
-  //   { priceCat: "default" },
-  //   { priceCat: "low" },
-  //   { priceCat: "high" },
-  // ];
+  const aaaaaaaaa = [
+    { priceCat: "default" },
+    { priceCat: "low" },
+    { priceCat: "high" },
+  ];
 
   useEffect(() => {
     axios
-      .get("https://service-web-server.vercel.app/limitService")
+      .get("https://service-web-server.vercel.app/allService")
       .then((response) => {
-        setService(response.data); // Access the data
-        setSelectedCategory(response.data);
+        setSelectedCategory(response.data.slice(0, 12));
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -60,7 +58,9 @@ const AllServices = () => {
       });
   }, []);
 
+
   //show data according to category
+
   const sendCat = (id) => {
     axios
       .get(`https://service-web-server.vercel.app/service/search?filter=${id}`)
@@ -72,14 +72,22 @@ const AllServices = () => {
       });
   };
 
-  // search input
 
+
+  // search input
+  
   const handleSearch = (data) => {
     axios
       .get(
         `https://service-web-server.vercel.app/service/search?filter=&search=${data}`
       )
       .then((response) => {
+        if (response.data.length === 0) {
+          setLoading(false);
+          setMessage("Nothing found related to your search");
+          setSelectedCategory([]);
+          return;
+        }
         setSelectedCategory(response.data);
       })
       .catch((error) => {
@@ -87,14 +95,25 @@ const AllServices = () => {
       });
   };
 
-  // show data each page
-  const handlePage = (page) => {
+
+  // show data each page and filter
+
+  useEffect(() => {
     axios
       .get(
-        `https://service-web-server.vercel.app/service/search/page?page=${page}&limit=${limit}`
+        `https://service-web-server.vercel.app/service/search/page?page=${pageNumber}&limit=${limit}` /////ddddddddd
       )
       .then((response) => {
         setSelectedCategory(response.data);
+        if (price === "low") {
+          setSelectedCategory(response.data.sort((a, b) => a.price - b.price));
+        }
+        if (price === "high") {
+          setSelectedCategory(response.data.sort((a, b) => b.price - a.price));
+        }
+        if (price === "default") {
+          setSelectedCategory(response.data);
+        }
         if (response.data.length === 0) {
           setMessage("Sorry No More Data available");
           setLoading(false);
@@ -103,7 +122,7 @@ const AllServices = () => {
           setLoading(true);
         }
       });
-  };
+  }, [pageNumber, price]);
 
   return (
     <section className="mt-12">
@@ -113,9 +132,9 @@ const AllServices = () => {
       <h4 className="text-2xl md:text-4xl text-center mb-12" ref={myRef}>
         A Hub for Service Excellence
       </h4>
-      <div className="grid grid-cols-1 justify-self-center gap-8 md:grid-cols-2">
+      <div className="grid grid-cols-3 gap-12">
         <Select
-          className="max-w-xs shadow rounded-2xl"
+          className="shadow rounded-2xl"
           label="Filter service"
           isVirtualized
         >
@@ -125,54 +144,24 @@ const AllServices = () => {
             </SelectItem>
           ))}
         </Select>
-        {/* <Select className="w-max-sm shadow rounded-2xl" label="Sort by Price">
+
+        <Input
+          onChange={(e, dddd) => handleSearch(e.target.value, dddd)}
+          isClearable
+          type="search"
+          label="Search"
+          placeholder="Search services"
+          radius="lg"
+          className=" shadow rounded-2xl"
+        />
+
+        <Select className="shadow rounded-2xl" label="Sort by Price">
           {aaaaaaaaa.map((item, index) => (
-            <SelectItem key={index}>{item.priceCat}</SelectItem>
+            <SelectItem onPress={() => setPrice(item.priceCat)} key={index}>
+              {item.priceCat}
+            </SelectItem>
           ))}
-        </Select> */}
-        <div className="relative">
-          <Input
-            onChange={(e) => handleSearch(e.target.value)}
-            classNames={{
-              label: "text-black/50 dark:text-white/90",
-              input: [
-                "bg-transparent",
-                "text-black/90 dark:text-white/90",
-                "placeholder:text-default-700/50 dark:placeholder:text-white/60 relative",
-              ],
-              innerWrapper: "bg-transparent",
-              inputWrapper: [
-                "shadow",
-                "base: w-[20rem]",
-                "dark:bg-default/60",
-                "backdrop-blur-xl",
-                "backdrop-saturate-200",
-                "hover:bg-default-200/70",
-                "dark:hover:bg-default/70",
-                "group-data-[focus=true]:bg-default-200/50",
-                "dark:group-data-[focus=true]:bg-default/60",
-              ],
-            }}
-            type="search"
-            label="Search"
-            placeholder="Search services"
-            radius="lg"
-          />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6 absolute right-5 top-[30%]"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-            />
-          </svg>
-        </div>
+        </Select>
       </div>
 
       <div className="gap-5 grid grid-cols-2 sm:grid-cols-4 mt-12 md:grid-cols-3 lg:grid-cols-4">
@@ -205,7 +194,6 @@ const AllServices = () => {
           <div className="col-span-full mt-12 flex flex-col justify-center items-center">
             {loading && <Spinner className="" size="lg" />}
             <h4 className="text-2xl md:text-4xl">{message}</h4>
-            {/* <img src={errorImage} className="w-72" alt="" /> */}
           </div>
         )}
         <div className="col-span-full mt-12 mx-auto w-max">
@@ -213,7 +201,7 @@ const AllServices = () => {
             showControls
             initialPage={1}
             total={10}
-            onChange={(initialPage) => handlePage(initialPage)}
+            onChange={(initialPage) => setPageNumber(initialPage)}
           />
         </div>
       </div>
