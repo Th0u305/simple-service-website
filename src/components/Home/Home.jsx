@@ -28,8 +28,8 @@ export default function App() {
       .then((response) => {
         setService(response.data.sort(() => Math.random() - 0.5).slice(0, 12));
         const data2 = response.data
-          .map((item) => item.reviews.find((item2) => item2.userName))
-          .filter(Boolean);
+          .map((item) => item?.reviews?.find((item2) => item2?.userName))
+          ?.filter(Boolean);
 
         setService2(data2);
       })

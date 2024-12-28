@@ -25,7 +25,7 @@ export function TestimonialCard({ service2 }) {
       className="w-full"
     >
       <div className="flex">
-        {sliceData.map((item, index) => (
+        {sliceData?.map((item, index) => (
           <Card
             key={index}
             color="transparent"
