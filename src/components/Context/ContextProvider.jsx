@@ -43,7 +43,7 @@ const ContextProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(firebaseAuth, async (currentUser) => {      
       if (currentUser?.email) {
         setUser(currentUser);
-        const {data} = await axios.post ('https://service-web-server.vercel.app/jwt', {email:currentUser?.email}, {withCredentials : true})
+        const {data} = await axios.post ('https://service-web-server.vercel.app/jwt', {email:currentUser?.email}, {withCredentials : true})  
       }else{
         setUser(currentUser)
         const {data} = await axios.get ('https://service-web-server.vercel.app/logout', {withCredentials : true})

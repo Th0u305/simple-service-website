@@ -88,7 +88,7 @@ export default function App() {
         )}
       </div>
       <BlurCard service2={service2}></BlurCard>
-      <Marquee2></Marquee2>
+      {/* <Marquee2></Marquee2> */}
       <h4 className="text-2xl md:text-3xl lg:text-4xl text-center mt-28 mb-12">
         Recent Reviews
       </h4>

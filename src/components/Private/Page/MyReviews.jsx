@@ -6,7 +6,9 @@ import {
   Card,
   CardBody,
   CardHeader,
+  darkLayout,
   Image,
+  Spinner,
   User,
 } from "@nextui-org/react";
 import Swal from "sweetalert2";
@@ -15,7 +17,11 @@ import { Helmet } from "react-helmet-async";
 
 const MyReviews = () => {
   const [service, setService] = useState([]);
+  const [service2, setService2] = useState([]);
+  const [service3, setService3] = useState([]);
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
+  const [viewText, setViewText] = useState(false);
   const navigate = useNavigate();
   let index;
 
@@ -23,17 +29,42 @@ const MyReviews = () => {
     axios
       .get("https://service-web-server.vercel.app/allService")
       .then((response) => {
-        const ppppp = response.data.map((item) =>
+        setService3(response.data);
+
+        // Dog shit
+
+        // const id = response.data
+        //   .map((item) =>
+        //     item?.reviews?.find((item2) => item2?.email === user?.email)
+        //   )
+        //   ?.filter(Boolean);
+
+        // getting reviews data and filtering by email
+        const resData = response.data.map((item) =>
           item.reviews.filter((item2) => item2.email === user.email)
         );
-        setService(ppppp.filter((item) => item.length > 0));
+
+        // removing empty array
+        const resData2 = resData.filter((item) => item.length > 0);
+        setService2(resData2);
+
+        // making all the array into one object
+        setService(
+          resData.filter((item) => item.length > 0).flatMap((array) => array)
+        );
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [service]);
+    setTimeout(function () {
+      setLoading(false);
+      setViewText(true);
+    }, 2200);
+  }, []);
 
-  const deleteReview = async (data, id2) => {
+  const deleteReview = async (data) => {
+    const resData = service3.filter((item) => item._id === data.id)[0].reviews;
+
     const { isConfirmed } = await Swal.fire({
       title: "Are you sure?",
       text: "Click confirm to delete",
@@ -44,44 +75,75 @@ const MyReviews = () => {
       confirmButtonText: "Yes, delete it!",
     });
     if (isConfirmed) {
-      service[0].some((object, idx) => {
+      resData.some((object, idx) => {
         if (
-          object.rating === data.rating &&
-          object.reviewText === data.reviewText
+          object.rating == data?.rating &&
+          object.reviewText === data?.reviewText
         ) {
           index = idx;
           return true;
         }
       });
+
       axios
-        .put(`https://service-web-server.vercel.app/deleteReview/${data.id}`, {
+        .put(`https://service-web-server.vercel.app/deleteReview/${data?.id}`, {
           index,
         })
         .then((response) => {
-          if (response.data.modifiedCount > 0) {
+          if (response.data?.modifiedCount > 0) {
+            setService(
+              service.filter(
+                (item) =>
+                  item.reviewText !== data.reviewText &&
+                  item.rating !== data.rating &&
+                  item.serviceTitle !== data.serviceTitle
+              )
+            );
+
             Swal.fire({
               title: "Deleted!",
               text: "Your review has been deleted.",
               icon: "success",
             });
+            setLoading(false);
+            setViewText(true);
           }
         })
         .catch((error) => console.error("Error:", error));
-      // location.reload();
     }
   };
 
-  const updateReview = (data, id2) => {
-    id2.some((object, idx) => {
+  const updateReview = (data) => {
+    const resData = service3.filter((item) => item._id === data.id)[0].reviews;
+
+    // add the array of obj index into obj
+
+    //   const flattened = service2.flatMap((array, arrayIndex) =>
+    //     array.map((item) => ({
+    //       ...item,
+    //       arrayIndex, // Add the array index to each object
+    //   }))
+    // );
+
+    // dog shit 2
+
+    // const whatImDoing = (flattened.filter(item =>
+    //     item.reviewText === data.reviewText &&
+    //     item.rating === data.rating &&
+    //     item.serviceTitle === data.serviceTitle)[0].arrayIndex);
+
+    // getting each obj index
+    resData.some((object, idx) => {
       if (
-        object.rating === data.rating &&
-        object.reviewText === data.reviewText
+        object.rating == data?.rating &&
+        object.reviewText === data?.reviewText
       ) {
         index = idx;
         return true;
       }
     });
-    navigate(`/updateReview/${data.id}/${index}`);
+
+    navigate(`/updateReview/${data?.id}/${index}`);
   };
 
   return (
@@ -91,8 +153,8 @@ const MyReviews = () => {
       </Helmet>
       <h4 className="text-center text-2xl md:text-4xl mt-16">My reviews</h4>
       <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        {service[0]?.length > 0 ? (
-          service[0]?.map((item, index) => (
+        {service?.length > 0 ? (
+          service?.map((item, index) => (
             <Card key={index} className="p-5 mt-12 ">
               <div className="col-span-2 mx-auto">
                 <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
@@ -112,10 +174,10 @@ const MyReviews = () => {
 
               <div>
                 <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                  <h4 className="font-bold text-large">{item.userName}</h4>
-                  <p>Rating: {item.rating}</p>
+                  <h4 className="font-bold text-large">{item?.userName}</h4>
+                  <p>Rating: {item?.rating}</p>
                   <p className="w-[90%] whitespace-nowrap overflow-hidden text-ellipsis">
-                    Description: {item.reviewText}
+                    Reviews: {item?.reviewText}
                   </p>
                   <div className="flex w-full justify-center items-center gap-5 mt-5 mb-5">
                     <Button onPress={() => deleteReview(item)}>Delete</Button>
@@ -128,8 +190,12 @@ const MyReviews = () => {
           ))
         ) : (
           <div className="col-span-full text-center mt-16 space-y-5">
-            <h4 className="text-xl md:text-3xl">No review available </h4>
-            <p className="text-lg">Add some reviews in services</p>
+            {loading && <Spinner className="col-span-full mt-12" size="lg" />}
+            {viewText && (
+              <h4 className="text-xl">
+                You didn't write any reviews in services
+              </h4>
+            )}
           </div>
         )}
       </div>

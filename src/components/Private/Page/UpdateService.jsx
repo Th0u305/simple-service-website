@@ -1,8 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
-import { Input, Textarea, Button, user } from "@nextui-org/react";
+import {
+  Input,
+  Textarea,
+  Button,
+  user,
+  Select,
+  SelectItem,
+} from "@nextui-org/react";
 import axios from "axios";
 import { AuthContext } from "../../Context/ContextProvider";
 import toast from "react-hot-toast";
@@ -17,6 +24,18 @@ const UpdateService = () => {
   const month = new Date().getMonth() + 1;
   const day = new Date().getDate();
   const loaderData = useLoaderData();
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://service-web-server.vercel.app/category")
+      .then((response) => {
+        setCategory(response.data); // Access the data
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   const {
     register,
@@ -39,11 +58,11 @@ const UpdateService = () => {
     }
 
     if (e.description.length === 0) {
-      setErrorMsg2("")
-    } else if (e.description.length < 10){
-        return setErrorMsg2("Please write more than 10 words");
+      setErrorMsg2("");
+    } else if (e.description.length < 10) {
+      return setErrorMsg2("Please write more than 10 words");
     }
-
+    setErrorMsg2("");
 
     const filterEmptyFields = Object.fromEntries(
       Object.entries(e).filter(
@@ -58,13 +77,13 @@ const UpdateService = () => {
       )
       .then((response) => {
         if (parseFloat(response.data.modifiedCount) > 0) {
-          toast.success("Successfully Added service");
+          toast.success("Successfully Updated service information");
         }
       })
       .catch((error) => {
         console.error("Error adding service:", error);
       });
-    // reset();
+    reset();
   };
 
   return (
@@ -153,12 +172,16 @@ const UpdateService = () => {
                     >
                       Category
                     </label>
-                    <Input
+                    <Select
+                      className="max-w-xs shadow rounded-2xl"
+                      label="Category"
+                      isVirtualized
                       {...register("category")}
-                      label="categories"
-                      type="text"
-                      variant={variant}
-                    />
+                    >
+                      {category.map((item) => (
+                        <SelectItem key={item.name}>{item.name}</SelectItem>
+                      ))}
+                    </Select>
                   </div>
                   <div>
                     <label

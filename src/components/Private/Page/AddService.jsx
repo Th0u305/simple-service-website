@@ -9,6 +9,7 @@ import {
   user,
   Select,
   SelectItem,
+  Spinner,
 } from "@nextui-org/react";
 import axios from "axios";
 import { AuthContext } from "../../Context/ContextProvider";
@@ -47,12 +48,12 @@ const AddService = () => {
   const onSubmit = (e) => {
     const split = e.addedDate.split("-");
 
-    if (e.title.length < 7) {
-      return setErrorMsg3("Please write more than 7 words");
+    if (e.title.length < 5) {
+      return setErrorMsg3("Please write more than 5 words");
     }
     setErrorMsg3("");
-    if (e.company.length < 7) {
-      return setErrorMsg4("Please write more than 7 words");
+    if (e.company.length < 5) {
+      return setErrorMsg4("Please write more than 5 words");
     }
     setErrorMsg4("");
     if (e.price < 100) {
@@ -96,10 +97,7 @@ const AddService = () => {
     );
 
     axios
-      .post(
-        "https://service-web-server.vercel.app/addService",
-        filterEmptyFields
-      )
+      .post("https://service-web-server.vercel.app/addService", filterEmptyFields)
       .then((response) => {
         if (parseFloat(response.data.insertedId) > 0) {
           toast.success("Successfully Added service");
@@ -115,171 +113,182 @@ const AddService = () => {
       <Helmet>
         <title>TrustWise | Add Service</title>
       </Helmet>
-      <section className="bg-[#f8f4f4] dark:bg-gray-900 mt-12 rounded-2xl border-2 border-gray-500" ref={myRef}>
-        <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
-          <h4 className="mb-12 text-2xl md:text-4xl font-bold text-gray-900 dark:text-white text-center">
-            Add Service
-          </h4>{" "}
-          <form action="#" onSubmit={handleSubmit(onSubmit)}>
-            <div className="">
-              {variants.map((variant) => (
-                <div
-                  key={variant}
-                  className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5"
-                >
-                  <div>
-                    <label
-                      for="name"
-                      className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Image url
-                    </label>
-                    <Input
-                      type="url"
-                      name="url"
-                      id="url"
-                      variant={variant}
-                      {...register("image")}
-                      label="https://example.com"
-                      pattern="https://.*"
-                      isRequired
-                    />
-                  </div>
-                  <div>
-                    <label
-                      for="name"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Title
-                    </label>
-                    <Input
-                      isRequired
-                      {...register("title")}
-                      label="Title"
-                      type="text"
-                      variant={variant}
-                    />
-                    <p className="text-red-500">{errorMsg3}</p>
-                  </div>
-                  <div>
-                    <label
-                      for="name"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Company Name
-                    </label>
-                    <Input
-                      {...register("company")}
-                      label="name"
-                      type="text"
-                      variant={variant}
-                      isRequired
-                    />
-                    <p className="text-red-500">{errorMsg4}</p>
-                  </div>
-                  <div>
-                    <label
-                      for="name"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Website url
-                    </label>
-                    <Input
-                      type="url"
-                      name="url"
-                      id="url"
-                      variant={variant}
-                      {...register("website")}
-                      label="https://example.com"
-                      pattern="https://.*"
-                      isRequired
-                    />
-                  </div>
-                  <div>
-                    <label
-                      for="name"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Category
-                    </label>
-                    <Select
-                      className="max-w-xs shadow rounded-2xl"
-                      label="Category"
-                      isVirtualized
-                      {...register("category")}
-                      isRequired
-                    >
-                      {category.map((item) => (
-                        <SelectItem key={item.name}>{item.name}</SelectItem>
-                      ))}
-                    </Select>
-                  </div>
-                  <div>
-                    <div className="flex justify-between">
+      {category.length > 0 ? (
+        <section
+          className="bg-[#f8f4f4] dark:bg-gray-900 mt-12 rounded-2xl border-2 border-gray-500"
+          ref={myRef}
+        >
+          <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
+            <h4 className="mb-12 text-2xl md:text-4xl font-bold text-gray-900 dark:text-white text-center">
+              Add Service
+            </h4>{" "}
+            <form action="#" onSubmit={handleSubmit(onSubmit)}>
+              <div className="">
+                {variants.map((variant) => (
+                  <div
+                    key={variant}
+                    className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5"
+                  >
+                    <div className="col-span-2 md:col-span-1">
                       <label
                         for="name"
-                        className="mb-2 text-gray-900 dark:text-white"
+                        className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
-                        Price:
+                        Image url
                       </label>
-                      <label className="text-gray-900 ">Min price : 100$</label>
+                      <Input
+                        type="url"
+                        name="url"
+                        id="url"
+                        variant={variant}
+                        {...register("image")}
+                        label="https://example.com"
+                        pattern="https://.*"
+                        isRequired
+                      />
+                    </div>
+                    <div className="col-span-2 md:col-span-1">
+                      <label
+                        for="name"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Title
+                      </label>
+                      <Input
+                        isRequired
+                        {...register("title")}
+                        label="Title"
+                        type="text"
+                        variant={variant}
+                      />
+                      <p className="text-red-500">{errorMsg3}</p>
+                    </div>
+                    <div className="col-span-2 md:col-span-1">
+                      <label
+                        for="name"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Company Name
+                      </label>
+                      <Input
+                        {...register("company")}
+                        label="name"
+                        type="text"
+                        variant={variant}
+                        isRequired
+                      />
+                      <p className="text-red-500">{errorMsg4}</p>
+                    </div>
+                    <div className="col-span-2 md:col-span-1">
+                      <label
+                        for="name"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Website url
+                      </label>
+                      <Input
+                        type="url"
+                        name="url"
+                        id="url"
+                        variant={variant}
+                        {...register("website")}
+                        label="https://example.com"
+                        pattern="https://.*"
+                        isRequired
+                      />
+                    </div>
+                    <div className="col-span-2 md:col-span-1">
+                      <label
+                        for="name"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Category
+                      </label>
+                      <Select
+                        className="max-w-xs shadow rounded-2xl"
+                        label="Category"
+                        isVirtualized
+                        {...register("category")}
+                        isRequired
+                      >
+                        {category.map((item) => (
+                          <SelectItem key={item.name}>{item.name}</SelectItem>
+                        ))}
+                      </Select>
+                    </div>
+                    <div className="col-span-2 md:col-span-1">
+                      <div className="flex justify-between">
+                        <label
+                          for="name"
+                          className="mb-2 text-gray-900 dark:text-white"
+                        >
+                          Price:
+                        </label>
+                        <label className="text-gray-900 ">
+                          Min price : 100$
+                        </label>
+                      </div>
+
+                      <Input
+                        isRequired
+                        {...register("price")}
+                        label="price"
+                        type="number"
+                        variant={variant}
+                      />
+                      <p className="text-red-500">{errorMsg5}</p>
                     </div>
 
-                    <Input
-                    isRequired
-                      {...register("price")}
-                      label="price"
-                      type="number"
-                      variant={variant}
-                    />
-                    <p className="text-red-500">{errorMsg5}</p>
+                    <div className="col-span-2">
+                      <label
+                        for="name"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Added date
+                      </label>
+                      <Input
+                        {...register("addedDate")}
+                        aria-label="Date and time"
+                        type="date"
+                        variant={variant}
+                        isRequired
+                      />
+                      <p className="text-red-500">{errorMsg}</p>
+                    </div>
+                    <div className="col-span-2">
+                      <label
+                        for="description"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Description
+                      </label>
+                      <Textarea
+                        isRequired
+                        disableAnimation
+                        minRows="8"
+                        {...register("description")}
+                        placeholder="Write your service description"
+                        variant="bordered"
+                      />
+                      <p className="text-red-500">{errorMsg2}</p>
+                    </div>
+                    <div></div>
                   </div>
-
-                  <div className="col-span-2">
-                    <label
-                      for="name"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Added date
-                    </label>
-                    <Input
-                      {...register("addedDate")}
-                      aria-label="Date and time"
-                      type="date"
-                      variant={variant}
-                      isRequired
-                    />
-                    <p className="text-red-500">{errorMsg}</p>
-                  </div>
-                  <div className="col-span-2">
-                    <label
-                      for="description"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Description
-                    </label>
-                    <Textarea
-                    isRequired
-                      disableAnimation
-                      minRows="8"
-                      {...register("description")}
-                      placeholder="Write your service description"
-                      variant="bordered"
-                    />
-                    <p className="text-red-500">{errorMsg2}</p>
-                  </div>
-                  <div></div>
-                </div>
-              ))}
-            </div>
-            <div className="flex items-center space-x-4">
-              <Button type="submit" size="lg">
-                Submit
-              </Button>
-            </div>
-          </form>
+                ))}
+              </div>
+              <div className="flex items-center space-x-4">
+                <Button type="submit" size="lg">
+                  Submit
+                </Button>
+              </div>
+            </form>
+          </div>
+        </section>
+      ) : (
+        <div className="flex justify-center items-center">
+          <Spinner className=" mt-12" size="lg" />
         </div>
-      </section>
+      )}
     </div>
   );
 };

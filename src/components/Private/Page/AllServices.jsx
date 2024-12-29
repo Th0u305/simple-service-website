@@ -58,7 +58,6 @@ const AllServices = () => {
       });
   }, []);
 
-
   //show data according to category
 
   const sendCat = (id) => {
@@ -72,15 +71,11 @@ const AllServices = () => {
       });
   };
 
-
-
   // search input
-  
+
   const handleSearch = (data) => {
     axios
-      .get(
-        `https://service-web-server.vercel.app/service/search?filter=&search=${data}`
-      )
+      .get(`https://service-web-server.vercel.app/service/search?filter=&search=${data}`)
       .then((response) => {
         if (response.data.length === 0) {
           setLoading(false);
@@ -95,13 +90,12 @@ const AllServices = () => {
       });
   };
 
-
   // show data each page and filter
 
   useEffect(() => {
     axios
       .get(
-        `https://service-web-server.vercel.app/service/search/page?page=${pageNumber}&limit=${limit}` /////ddddddddd
+        `https://service-web-server.vercel.app/service/search?page=${pageNumber}&limit=${limit}` /////ddddddddd
       )
       .then((response) => {
         setSelectedCategory(response.data);
@@ -115,8 +109,10 @@ const AllServices = () => {
           setSelectedCategory(response.data);
         }
         if (response.data.length === 0) {
-          setMessage("Sorry No More Data available");
-          setLoading(false);
+          setTimeout(function () {
+            setMessage("Sorry No More Data available");
+            setLoading(false);
+          }, 2000);
         } else {
           setMessage("");
           setLoading(true);
