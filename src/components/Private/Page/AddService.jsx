@@ -97,8 +97,10 @@ const AddService = () => {
     );
 
     axios
-      .post("https://service-web-server.vercel.app/addService", filterEmptyFields)
-      .then((response) => {
+      .post("https://service-web-server.vercel.app/addService", filterEmptyFields, { withCredentials: true })
+      .then((response) => {    
+        console.log(response.data);
+            
         if (parseFloat(response.data.insertedId) > 0) {
           toast.success("Successfully Added service");
         }
@@ -277,7 +279,7 @@ const AddService = () => {
                 ))}
               </div>
               <div className="flex items-center space-x-4">
-                <Button type="submit" size="lg">
+                <Button color="primary" type="submit" size="lg">
                   Submit
                 </Button>
               </div>

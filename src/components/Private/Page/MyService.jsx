@@ -41,7 +41,7 @@ const MyPostedJobs = () => {
 
     if (isConfirmed) {
       axios
-        .delete(`https://service-web-server.vercel.app/deleteService/${id}`)
+        .delete(`https://service-web-server.vercel.app/deleteService/${id}`, { withCredentials: true })
         .then((response) => {
           if (response.data.deletedCount > 0) {
             setService(service.filter((item) => item._id !== id));

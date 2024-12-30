@@ -86,7 +86,7 @@ const UpdateService = () => {
     axios
       .put(
         `https://service-web-server.vercel.app/singleService/update/${paramsData.id}`,
-        filterEmptyFields
+        filterEmptyFields, { withCredentials: true }
       )
       .then((response) => {
         if (parseFloat(response.data.modifiedCount) > 0) {
@@ -116,7 +116,7 @@ const UpdateService = () => {
                   key={variant}
                   className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5"
                 >
-                  <div>
+                  <div className="col-span-2">
                     <label
                       for="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -133,7 +133,7 @@ const UpdateService = () => {
                       pattern="https://.*"
                     />
                   </div>
-                  <div>
+                  <div className="col-span-2">
                     <label
                       for="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -147,7 +147,7 @@ const UpdateService = () => {
                       variant={variant}
                     />
                   </div>
-                  <div>
+                  <div className="col-span-2">
                     <label
                       for="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -161,7 +161,7 @@ const UpdateService = () => {
                       variant={variant}
                     />
                   </div>
-                  <div>
+                  <div className="col-span-2">
                     <label
                       for="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -178,7 +178,7 @@ const UpdateService = () => {
                       pattern="https://.*"
                     />
                   </div>
-                  <div>
+                  <div className="col-span-2">
                     <label
                       for="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -196,7 +196,7 @@ const UpdateService = () => {
                       ))}
                     </Select>
                   </div>
-                  <div>
+                  <div className="col-span-2">
                     <label
                       for="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -210,7 +210,6 @@ const UpdateService = () => {
                       variant={variant}
                     />
                   </div>
-
                   <div className="col-span-2">
                     <label
                       for="name"

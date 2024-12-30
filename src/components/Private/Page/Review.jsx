@@ -58,7 +58,7 @@ const Review = () => {
     axios
       .put(
         `https://service-web-server.vercel.app/singleService/${loaderData._id}/review`,
-        aaaaaa
+        aaaaaa, { withCredentials: true }
       )
       .then((response) => {
         if (response.status === 200) {

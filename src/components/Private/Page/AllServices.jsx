@@ -75,7 +75,9 @@ const AllServices = () => {
 
   const handleSearch = (data) => {
     axios
-      .get(`https://service-web-server.vercel.app/service/search?filter=&search=${data}`)
+      .get(
+        `https://service-web-server.vercel.app/service/search?filter=&search=${data}`
+      )
       .then((response) => {
         if (response.data.length === 0) {
           setLoading(false);
@@ -181,6 +183,8 @@ const AllServices = () => {
                 onPress={() => handleChange(item)}
                 size="sm"
                 className="mx-auto mb-4"
+                color="primary"
+                variant="bordered"
               >
                 View details
               </Button>

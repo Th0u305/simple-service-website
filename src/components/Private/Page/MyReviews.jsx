@@ -86,9 +86,7 @@ const MyReviews = () => {
       });
 
       axios
-        .put(`https://service-web-server.vercel.app/deleteReview/${data?.id}`, {
-          index,
-        })
+        .put(`https://service-web-server.vercel.app/deleteReview/${data?.id}`, {index}, { withCredentials: true })
         .then((response) => {
           if (response.data?.modifiedCount > 0) {
             setService(
@@ -180,8 +178,8 @@ const MyReviews = () => {
                     Reviews: {item?.reviewText}
                   </p>
                   <div className="flex w-full justify-center items-center gap-5 mt-5 mb-5">
-                    <Button onPress={() => deleteReview(item)}>Delete</Button>
-                    <Button onPress={() => updateReview(item)}>Update</Button>
+                    <Button color="danger" onPress={() => deleteReview(item)}>Delete</Button>
+                    <Button color="primary" onPress={() => updateReview(item)}>Update</Button>
                   </div>
                 </CardHeader>
                 <hr />

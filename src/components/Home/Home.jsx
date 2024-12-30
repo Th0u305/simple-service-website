@@ -88,8 +88,13 @@ export default function App() {
         )}
       </div>
       <BlurCard service2={service2}></BlurCard>
-      {/* <Marquee2></Marquee2> */}
-      <h4 className="text-2xl md:text-3xl lg:text-4xl text-center mt-28 mb-12">
+      <div>
+        <h4 className="text-center text-2xl md:text-3xl lg:text-4xl mb-14">
+          Meet Our Partners
+        </h4>
+        <Marquee2></Marquee2>
+      </div>
+      <h4 className="text-2xl md:text-3xl lg:text-4xl text-center mt-14 mb-12">
         Recent Reviews
       </h4>
       <TestimonialCard service2={service2}></TestimonialCard>
