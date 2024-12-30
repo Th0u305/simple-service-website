@@ -29,6 +29,7 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         setUser(result.user);
+        toast.success("Successfully Logged in")
         navigate(state);
       })
       .catch(() => {
