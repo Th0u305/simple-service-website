@@ -71,7 +71,7 @@ const UpdateReview = () => {
       Object.entries(aaaaaa).filter(
         ([_, value]) => value !== "" && value !== undefined
       )
-    );    
+    );        
 
     axios
       .put(`https://service-web-server.vercel.app/updateReviews/${pathname.split("/")[2]}`, filterEmptyFields)
@@ -81,7 +81,7 @@ const UpdateReview = () => {
         }
       })
       .catch((error) => console.error("Error:", error));
-      reset();
+      // reset();
   };
 
   return (
