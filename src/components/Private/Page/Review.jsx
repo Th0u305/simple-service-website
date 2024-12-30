@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Button, Input, Textarea } from "@nextui-org/react";
 import { Rating } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../Context/ContextProvider";
 import toast from "react-hot-toast";
@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 const Review = () => {
   const [rated, setRated] = useState(4);
   const loaderData = useLoaderData();
+  const paramsData = useParams();
   const { user } = useContext(AuthContext);
   const currentYear = new Date().getFullYear();
   const month = new Date().getMonth() + 1;
@@ -24,7 +25,7 @@ const Review = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (e) => {
+  const onSubmit = (e) => {    
     const split = e.postedDate.split("-");
 
     if (e.reviewText.length < 10) {
@@ -57,8 +58,7 @@ const Review = () => {
 
     axios
       .put(
-        `https://service-web-server.vercel.app/singleService/${loaderData._id}/review`,
-        aaaaaa, { withCredentials: true }
+        `https://service-web-server.vercel.app/singleService/${loaderData._id}/review`, aaaaaa
       )
       .then((response) => {
         if (response.status === 200) {

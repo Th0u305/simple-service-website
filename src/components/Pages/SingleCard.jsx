@@ -55,10 +55,10 @@ export default function App() {
           </p>
         </CardHeader>
       </div>
-      <h4 className="text-3xl text-center mt-5 mb-5">Reviews</h4>
+      <h4 className="text-3xl text-center mt-5 mb-5">Reviews: ({loaderData?.reviews?.length})</h4>
       <hr />
-      {loaderData?.reviews.length > 0 ? (
-        loaderData?.reviews.map((item, index) => (
+      {loaderData?.reviews?.length > 0 ? (
+        loaderData?.reviews?.map((item, index) => (
           <div key={index} className="py-3">
             <CardHeader className="flex-col items-start px-0">
               <User

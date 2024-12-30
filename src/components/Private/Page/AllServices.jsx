@@ -29,7 +29,6 @@ const AllServices = () => {
 
   const handleChange = (item) => {
     navigate(`/service/${item._id}`);
-    setDeleteReview(item._id);
   };
 
   const aaaaaaaaa = [
