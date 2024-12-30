@@ -74,7 +74,7 @@ const UpdateReview = () => {
     );    
 
     axios
-      .put(`https://service-web-server.vercel.app/updateReviews/${pathname.split("/")[2]}`)
+      .put(`https://service-web-server.vercel.app/updateReviews/${pathname.split("/")[2]}`, filterEmptyFields)
       .then((response) => {
         if (response.data.modifiedCount > 0) {
           toast.success("Successfully updated review");
