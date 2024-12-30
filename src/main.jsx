@@ -131,7 +131,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `http://localhost:5000/singleService/update/${params.id}`
+            `https://service-web-server.vercel.app/singleService/update/${params.id}`
           ),
       },
       {

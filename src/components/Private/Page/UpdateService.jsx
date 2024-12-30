@@ -85,7 +85,7 @@ const UpdateService = () => {
 
     axios
       .put(
-        `http://localhost:5000/singleService/update/${paramsData.id}`,
+        `https://service-web-server.vercel.app/singleService/update/${paramsData.id}`,
         filterEmptyFields
       )
       .then((response) => {
@@ -96,7 +96,7 @@ const UpdateService = () => {
       .catch((error) => {
         console.error("Error adding service:", error);
       });
-    // reset();
+    reset();
   };
 
   return (
