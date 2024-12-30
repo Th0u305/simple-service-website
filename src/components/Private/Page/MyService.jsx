@@ -140,7 +140,7 @@ const MyPostedJobs = () => {
                           {item.addedDate}
                         </td>
 
-                        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                        <td className="px-4 py-4 text-sm text-gray-500 break-all break-words max-w-12">
                           {item.price}
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">

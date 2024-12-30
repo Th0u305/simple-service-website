@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 import { AuthContext } from "../../Context/ContextProvider";
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 
 const UpdateService = () => {
   const variants = ["bordered"];
@@ -24,6 +24,7 @@ const UpdateService = () => {
   const month = new Date().getMonth() + 1;
   const day = new Date().getDate();
   const loaderData = useLoaderData();
+  const paramsData = useParams();
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
@@ -57,6 +58,18 @@ const UpdateService = () => {
       setErrorMsg("");
     }
 
+    if (
+      e.description.length === 0 &&
+      e.category.length === 0 &&
+      e.company.length === 0 &&
+      e.image.length === 0 &&
+      e.price.length === 0 &&
+      e.title.length === 0 &&
+      e.website.length === 0
+    ) {
+      return toast.error("You cannot submit an empty form");
+    }
+
     if (e.description.length === 0) {
       setErrorMsg2("");
     } else if (e.description.length < 10) {
@@ -72,7 +85,7 @@ const UpdateService = () => {
 
     axios
       .put(
-        `https://service-web-server.vercel.app/singleService/update/${loaderData._id}`,
+        `http://localhost:5000/singleService/update/${paramsData.id}`,
         filterEmptyFields
       )
       .then((response) => {
@@ -83,7 +96,7 @@ const UpdateService = () => {
       .catch((error) => {
         console.error("Error adding service:", error);
       });
-    reset();
+    // reset();
   };
 
   return (
@@ -91,7 +104,7 @@ const UpdateService = () => {
       <Helmet>
         <title>EcoVenture | AddMovies</title>
       </Helmet>
-      <section className="bg-white dark:bg-gray-900">
+      <section className="bg-white dark:bg-gray-900 mt-16 rounded-2xl border-2 border-gray-500">
         <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
           <h4 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
             Update Service
@@ -214,7 +227,7 @@ const UpdateService = () => {
                     />
                     <p className="text-red-500">{errorMsg}</p>
                   </div>
-                  <div>
+                  <div className="col-span-2">
                     <label
                       for="description"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -225,9 +238,6 @@ const UpdateService = () => {
                       disableAnimation
                       minRows="8"
                       {...register("description")}
-                      classNames={{
-                        base: "max-w-xs",
-                      }}
                       placeholder="Write your service description"
                       variant="bordered"
                     />
