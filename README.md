@@ -1,10 +1,8 @@
-<h1 align="center" id="title">CineVault</h1>
-<br/>
-<p id="description">  "Discover your next favorite movie with us! From timeless classics to the latest blockbusters, CineVault brings you a curated collection of films to explore, rate, and share. Join our community of movie lovers today!"</p>
+<h1 align="center" id="title">TrustWise</h1>
 <br/>
 <h1>😊Live Link:</h1>
 
-<h3>/</h3>
+<h3>https://simple-service-three.vercel.app/</h3>
 
   <br/>
 
@@ -26,8 +24,6 @@ Npm package used in the project:
 - React SweetAlert2
 - AOS Package
 - Animate.css
-- FlowByte library
-- Firebase
 - React hot-toast
 - React-helmet
 
@@ -44,3 +40,6 @@ Technologies used in the project:
 - ExpressJs
 - Mongodb
 - Cors
+- Mongodb
+- CookieParser
+- FireBase
