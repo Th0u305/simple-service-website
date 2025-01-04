@@ -129,7 +129,7 @@ const AllServices = () => {
       <h4 className="text-2xl md:text-4xl text-center mb-12" ref={myRef}>
         A Hub for Service Excellence
       </h4>
-      <div className="grid grid-cols-3 gap-12">
+      <div className="grid md:grid-cols-3 gap-5 xl:gap-12">
         <Select
           className="shadow rounded-2xl"
           label="Filter service"
