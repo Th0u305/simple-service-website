@@ -37,7 +37,7 @@ export default function App() {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, {});
+  }, []);
 
   const handleChange = (item) => {
     navigate(`/service/${item._id}`);
