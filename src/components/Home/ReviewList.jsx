@@ -4,10 +4,12 @@ import {
   CardBody,
   Typography,
   Avatar,
-  Rating,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
+import { Rating } from '@smastrom/react-rating'
+
+import '@smastrom/react-rating/style.css'
 
 export function TestimonialCard({ service2 }) {
   const [sliceData, setSliceData] = useState([]);
@@ -50,7 +52,7 @@ export function TestimonialCard({ service2 }) {
                     {item?.userName}
                   </Typography>
                   <div className="5 flex items-center gap-0">
-                    <Rating value={item?.rating} readonly />
+                    <Rating style={{ maxWidth: 120 }} value={item?.rating} readOnly/>
                   </div>
                 </div>
               </div>

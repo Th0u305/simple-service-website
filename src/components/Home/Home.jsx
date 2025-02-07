@@ -20,7 +20,7 @@ export default function App() {
   const [service, setService] = useState([]);
   const [service2, setService2] = useState([]);
   const navigate = useNavigate();
-  const { myRef } = useContext(AuthContext);
+  const { myRef , setLoader} = useContext(AuthContext);
 
   useEffect(() => {
     axios
@@ -32,6 +32,7 @@ export default function App() {
           ?.filter(Boolean);
 
         setService2(data2);
+        setLoader(false)
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

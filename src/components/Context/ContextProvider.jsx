@@ -22,6 +22,7 @@ const ContextProvider = ({ children }) => {
   const [viewWallet, setViewWallet] = useState(false);
   const [viewProfile, setVieProfile] = useState(true);
   const [viewSetting, setViewSetting] = useState(false);
+  const [loader, setLoader] = useState(true)
   const myRef = useRef(null)
 
 
@@ -96,7 +97,9 @@ const ContextProvider = ({ children }) => {
     viewWallet,
     setViewWallet,
     viewSetting,
-    setViewSetting
+    setViewSetting,
+    loader,
+    setLoader
   };
 
   return (

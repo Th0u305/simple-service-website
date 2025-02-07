@@ -121,7 +121,7 @@ export default function App() {
                   base: "gap-4",
                 }}
               >
-                <DropdownItem key="autoscaling" className="w-fit mx-auto">
+                <DropdownItem key="autoscaling" className="w-fit mx-auto" textValue="daw">
                   <Link
                     className="text-lg "
                     color="foreground"
@@ -136,7 +136,7 @@ export default function App() {
                     All Services
                   </Link>
                 </DropdownItem>
-                <DropdownItem key="usage_metrics" className="w-fit mx-auto">
+                <DropdownItem key="usage_metrics" className="w-fit mx-auto" textValue="oad">
                   {" "}
                   <Link
                     className="text-lg"
@@ -152,7 +152,7 @@ export default function App() {
                     Add Service
                   </Link>
                 </DropdownItem>
-                <DropdownItem key="production_ready" className="w-fit mx-auto">
+                <DropdownItem key="production_ready" className="w-fit mx-auto" textValue="3e">
                   {" "}
                   <Link
                     className="text-lg"
@@ -168,7 +168,7 @@ export default function App() {
                     My Reviews
                   </Link>
                 </DropdownItem>
-                <DropdownItem key="production_ready" className="w-fit mx-auto">
+                <DropdownItem key="production_ready" className="w-fit mx-auto" textValue="90f">
                   {" "}
                   <Link
                     className="text-lg"
@@ -242,7 +242,7 @@ export default function App() {
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="">
+            <DropdownItem key="profile" className="" textValue="--">
               <p className="font-semibold">
                 <Avatar
                   isBordered
@@ -258,38 +258,38 @@ export default function App() {
                 {user?.email || "example@gmail.com"}
               </p>
             </DropdownItem>
-            <DropdownItem key="settings" href="/dashboard">
+            <DropdownItem key="settings2" href="/dashboard" textValue="12">
               <p className="flex justify-start items-center gap-2">
                 <FaUser className="text-xl"></FaUser>
                 My profile
               </p>
             </DropdownItem>
-            <DropdownItem key="settings" href="/dashboard">
+            <DropdownItem key="settings" href="/dashboard" textValue="44">
               <p className="flex justify-start items-center gap-2">
                 <MdDashboard className="text-xl text-blue-500"></MdDashboard>
                 Dashboard
               </p>
             </DropdownItem>
-            <DropdownItem key="system" href="/dashboard">
+            <DropdownItem key="system" href="/dashboard" textValue="66">
               <p className="flex justify-start items-center gap-2">
                 <IoMdSettings className="text-xl"></IoMdSettings>
                 Settings
               </p>
             </DropdownItem>
-            <DropdownItem key="configurations" href="/dashboard">
+            <DropdownItem key="configurations" href="/dashboard" textValue="69">
               <p className="flex justify-start items-center gap-2">
                 <MdOutlineAttachMoney className="text-xl text-green-600"></MdOutlineAttachMoney>
                 Billings
               </p>
             </DropdownItem>
-            <DropdownItem key="help_and_feedback">
+            <DropdownItem key="help_and_feedback" textValue=";l">
               {" "}
               <p className="flex justify-start items-center gap-2">
                 <FaLifeRing className="text-xl text-yellow-800"></FaLifeRing>
                 Help & Feedback
               </p>
             </DropdownItem>
-            <DropdownItem onPress={handleSignOutUser}>
+            <DropdownItem onPress={handleSignOutUser} textValue="2fv">
               <p className="flex justify-center items-center gap-2 bg-red-100 p-3 rounded-2xl">
                 <MdLogout className="text-xl text-red-600"></MdLogout>
                 Log out

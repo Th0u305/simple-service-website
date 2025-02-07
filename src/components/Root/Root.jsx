@@ -8,11 +8,12 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "../Navbar/Navbar";
 import { AuthContext } from "../Context/ContextProvider";
 import { NextUIProvider } from "@nextui-org/react";
+import "./loader.css";
 
 const Root = () => {
   const { pathname } = useLocation();
   const [views, setViews] = useState(true);
-  const { setViewWallet, setVieProfile, setViewSetting } =
+  const { setViewWallet, setVieProfile, setViewSetting, loader , loading} =
     useContext(AuthContext);
 
   useEffect(() => {
@@ -46,16 +47,20 @@ const Root = () => {
 
   return (
     <NextUIProvider>
-      <div>
-        <Helmet></Helmet>
-        <Toaster />
-        <Navbar></Navbar>
-        {views && <Carrousel></Carrousel>}
-        <div className="container mx-auto p-3 md:p-0">
-          <Outlet></Outlet>
+      {loading ? (
+        <div className="loader h-screen mx-auto my-auto"></div>
+      ) : (
+        <div>
+          <Helmet></Helmet>
+          <Toaster />
+          <Navbar></Navbar>
+          {views && <Carrousel></Carrousel>}
+          <div className="container mx-auto p-3 md:p-0">
+            <Outlet></Outlet>
+          </div>
+          <FooterWithSocialLinks></FooterWithSocialLinks>
         </div>
-        <FooterWithSocialLinks></FooterWithSocialLinks>
-      </div>
+      )}
     </NextUIProvider>
   );
 };
