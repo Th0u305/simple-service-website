@@ -14,6 +14,7 @@ import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../Context/ContextProvider";
 import { TestimonialCard } from "./ReviewList";
 import BlurCard from "./Cards";
+import NewsLetter from "./NewsLetter";
 
 export default function App() {
   const navigate = useNavigate();
@@ -79,6 +80,7 @@ export default function App() {
         Recent Reviews
       </h4>
       <TestimonialCard service2={service2}></TestimonialCard>
+      <NewsLetter/>
     </div>
   );
 }
