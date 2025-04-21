@@ -5,9 +5,8 @@ import {
   CardFooter,
   Image,
   Spinner,
-  User,
 } from "@nextui-org/react";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Marquee2 from "./Marquee";
@@ -17,27 +16,8 @@ import { TestimonialCard } from "./ReviewList";
 import BlurCard from "./Cards";
 
 export default function App() {
-  const [service, setService] = useState([]);
-  const [service2, setService2] = useState([]);
   const navigate = useNavigate();
-  const { myRef , setLoader} = useContext(AuthContext);
-
-  useEffect(() => {
-    axios
-      .get("https://service-web-server.vercel.app/allService")
-      .then((response) => {
-        setService(response.data.sort(() => Math.random() - 0.5).slice(0, 12));
-        const data2 = response.data
-          .map((item) => item?.reviews?.find((item2) => item2?.userName))
-          ?.filter(Boolean);
-
-        setService2(data2);
-        setLoader(false)
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+  const { myRef , service, service2} = useContext(AuthContext);
 
   const handleChange = (item) => {
     navigate(`/service/${item._id}`);

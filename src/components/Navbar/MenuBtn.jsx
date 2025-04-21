@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import {
   Menu,
@@ -8,10 +8,12 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/ContextProvider";
 
 export function NestedMenu() {
   const [openMenu, setOpenMenu] = React.useState(false);
   const [openMenu2, setOpenMenu2] = React.useState(true);
+  const {user} = useContext(AuthContext)
   const navigate = useNavigate()
 
   return (
@@ -56,7 +58,7 @@ export function NestedMenu() {
         </button>
       </MenuHandler>
       <MenuList className="ml-2 md:ml-6 mt-5">
-        <MenuItem onClick={() => navigate("/")}>Home</MenuItem>
+        <MenuItem key="^&r" onClick={() => navigate("/")}>Home</MenuItem>
         <Menu
           placement="right-start"
           open={openMenu}
@@ -65,7 +67,7 @@ export function NestedMenu() {
           offset={15}
         >
           <MenuHandler className="flex items-center justify-between">
-            <MenuItem>
+            <MenuItem key=";;;12">
               Service
               <ChevronUpIcon
                 strokeWidth={2.5}
@@ -76,14 +78,18 @@ export function NestedMenu() {
             </MenuItem>
           </MenuHandler>
           <MenuList>
-            <MenuItem onClick={() => navigate("/services")}> All Services</MenuItem>
-            <MenuItem onClick={() => navigate("/addService")}> Add Service</MenuItem>
-            <MenuItem onClick={() => navigate("/myReviews")}> My Reviews</MenuItem>
-            <MenuItem onClick={() => navigate("/myService")}> My Services</MenuItem>
+            <MenuItem key="eee11" onClick={() => navigate("/services")}> All Services</MenuItem>
+            {user && (
+              <>
+                <MenuItem key="eee22" onClick={() => navigate("/addService")}> Add Service</MenuItem>
+                <MenuItem key="eee33" onClick={() => navigate("/myReviews")}> My Reviews</MenuItem>
+                <MenuItem key="eee44" onClick={() => navigate("/myService")}> My Services</MenuItem>
+              </>
+            )}
           </MenuList>
         </Menu>
-        <MenuItem onClick={() => navigate("/contact")}>Contact</MenuItem>
-        <MenuItem onClick={() => navigate("/about")}> About us</MenuItem>
+        <MenuItem key="[[[22" onClick={() => navigate("/contact")}>Contact</MenuItem>
+        <MenuItem key="[[[44" onClick={() => navigate("/about")}> About us</MenuItem>
         <Button onClick={() => navigate("/login")}>Login</Button>
       </MenuList>
     </Menu>

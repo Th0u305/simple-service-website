@@ -118,7 +118,7 @@ const UpdateService = () => {
                 >
                   <div className="col-span-2">
                     <label
-                      for="name"
+                      htmlFor="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Image url
@@ -135,7 +135,7 @@ const UpdateService = () => {
                   </div>
                   <div className="col-span-2">
                     <label
-                      for="name"
+                      htmlFor="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Title
@@ -149,7 +149,7 @@ const UpdateService = () => {
                   </div>
                   <div className="col-span-2">
                     <label
-                      for="name"
+                      htmlFor="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Company Name
@@ -163,7 +163,7 @@ const UpdateService = () => {
                   </div>
                   <div className="col-span-2">
                     <label
-                      for="name"
+                      htmlFor="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Website url
@@ -180,7 +180,7 @@ const UpdateService = () => {
                   </div>
                   <div className="col-span-2">
                     <label
-                      for="name"
+                      htmlFor="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Category
@@ -198,7 +198,7 @@ const UpdateService = () => {
                   </div>
                   <div className="col-span-2">
                     <label
-                      for="name"
+                      htmlFor="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Price
@@ -212,7 +212,7 @@ const UpdateService = () => {
                   </div>
                   <div className="col-span-2">
                     <label
-                      for="name"
+                      htmlFor="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Added date
@@ -228,7 +228,7 @@ const UpdateService = () => {
                   </div>
                   <div className="col-span-2">
                     <label
-                      for="description"
+                      htmlFor="description"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Description

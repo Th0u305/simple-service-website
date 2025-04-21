@@ -24,6 +24,7 @@ import {
 } from "@nextui-org/react";
 import { AuthContext } from "../Context/ContextProvider";
 import { NestedMenu } from "./MenuBtn";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const AcmeLogo = () => {
   return (
@@ -40,6 +41,8 @@ export const AcmeLogo = () => {
 
 export default function App() {
   const { user, signOutUser } = useContext(AuthContext);
+  const navigate = useNavigate()
+  const { state } = useLocation();
 
   const handleSignOutUser = () => {
     if (!user && !user?.email) {
@@ -48,7 +51,9 @@ export default function App() {
     signOutUser()
       .then(() => {
         if (user) {
+          navigate(state || "/")
           toast.success("Signed Out Successfully");
+          return;
         }
       })
       .catch(() => {
@@ -121,7 +126,11 @@ export default function App() {
                   base: "gap-4",
                 }}
               >
-                <DropdownItem key="autoscaling" className="w-fit mx-auto" textValue="daw">
+                <DropdownItem
+                  key="autoscaling"
+                  className="w-fit mx-auto"
+                  textValue="daw"
+                >
                   <Link
                     className="text-lg "
                     color="foreground"
@@ -136,54 +145,70 @@ export default function App() {
                     All Services
                   </Link>
                 </DropdownItem>
-                <DropdownItem key="usage_metrics" className="w-fit mx-auto" textValue="oad">
-                  {" "}
-                  <Link
-                    className="text-lg"
-                    color="foreground"
-                    aria-current="page"
-                    href="/addService"
-                    onPress={() =>
-                      myRef.current?.scrollIntoView({
-                        behavior: "smooth",
-                      })
-                    }
-                  >
-                    Add Service
-                  </Link>
-                </DropdownItem>
-                <DropdownItem key="production_ready" className="w-fit mx-auto" textValue="3e">
-                  {" "}
-                  <Link
-                    className="text-lg"
-                    color="foreground"
-                    aria-current="page"
-                    href="/myReviews"
-                    onPress={() =>
-                      myRef.current?.scrollIntoView({
-                        behavior: "smooth",
-                      })
-                    }
-                  >
-                    My Reviews
-                  </Link>
-                </DropdownItem>
-                <DropdownItem key="production_ready" className="w-fit mx-auto" textValue="90f">
-                  {" "}
-                  <Link
-                    className="text-lg"
-                    color="foreground"
-                    aria-current="page"
-                    href="/myService"
-                    onPress={() =>
-                      myRef.current?.scrollIntoView({
-                        behavior: "smooth",
-                      })
-                    }
-                  >
-                    My Services
-                  </Link>
-                </DropdownItem>
+                {user && (
+                  <>
+                    <DropdownItem
+                      key="usage_metrics"
+                      className="w-fit mx-auto"
+                      textValue="oad"
+                    >
+                      {" "}
+                      <Link
+                        className="text-lg"
+                        color="foreground"
+                        aria-current="page"
+                        href="/addService"
+                        onPress={() =>
+                          myRef.current?.scrollIntoView({
+                            behavior: "smooth",
+                          })
+                        }
+                      >
+                        Add Service
+                      </Link>
+                    </DropdownItem>
+                    <DropdownItem
+                      key="production_ready"
+                      className="w-fit mx-auto"
+                      textValue="3e"
+                    >
+                      {" "}
+                      <Link
+                        className="text-lg"
+                        color="foreground"
+                        aria-current="page"
+                        href="/myReviews"
+                        onPress={() =>
+                          myRef.current?.scrollIntoView({
+                            behavior: "smooth",
+                          })
+                        }
+                      >
+                        My Reviews
+                      </Link>
+                    </DropdownItem>
+                    <DropdownItem
+                      key="production_ready33"
+                      className="w-fit mx-auto"
+                      textValue="90f"
+                    >
+                      {" "}
+                      <Link
+                        className="text-lg"
+                        color="foreground"
+                        aria-current="page"
+                        href="/myService"
+                        onPress={() =>
+                          myRef.current?.scrollIntoView({
+                            behavior: "smooth",
+                          })
+                        }
+                      >
+                        My Services
+                      </Link>
+                    </DropdownItem>
+                  </>
+                )}
               </DropdownMenu>
             </Dropdown>
           </NavbarContent>
@@ -289,7 +314,11 @@ export default function App() {
                 Help & Feedback
               </p>
             </DropdownItem>
-            <DropdownItem onPress={handleSignOutUser} textValue="2fv">
+            <DropdownItem
+              key="ooooooo"
+              onPress={handleSignOutUser}
+              textValue="2fv"
+            >
               <p className="flex justify-center items-center gap-2 bg-red-100 p-3 rounded-2xl">
                 <MdLogout className="text-xl text-red-600"></MdLogout>
                 Log out

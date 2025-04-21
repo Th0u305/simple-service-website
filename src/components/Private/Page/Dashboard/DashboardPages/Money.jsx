@@ -56,15 +56,15 @@ const Money = () => {
       <div className="w-[70%] mx-auto">
         <h3 className="text-lg font-semibold mb-4">Adventure Cost: {money?.adventureCost || 0} </h3>
       </div>
-      <div class="w-full max-w-lg mx-auto ">
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h2 class="text-3xl font-medium mb-6">Payment Information</h2>
+      <div className="w-full max-w-lg mx-auto ">
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-3xl font-medium mb-6">Payment Information</h2>
           <form onSubmit={addCardInfo}>
-            <div class="grid grid-cols-2 gap-6">
-              <div class="col-span-2">
+            <div className="grid grid-cols-2 gap-6">
+              <div className="col-span-2">
                 <label
-                  for="card-number"
-                  class="block text-sm font-medium text-gray-700 mb-2"
+                  htmlFor="card-number"
+                  className="block text-sm font-medium text-gray-700 mb-2"
                 >
                   Card Number
                 </label>
@@ -74,14 +74,14 @@ const Money = () => {
                   required
                   id="card-number"
                   placeholder="0000 0000 0000 0000"
-                  class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500"
+                  className="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500"
                 ></input>
                 <p className="text-red-600">{errorMessage}</p>
               </div>
-              <div class="col-span-2 sm:col-span-1">
+              <div className="col-span-2 sm:col-span-1">
                 <label
-                  for="expiration-date"
-                  class="block text-sm font-medium text-gray-700 mb-2"
+                  htmlFor="expiration-date"
+                  className="block text-sm font-medium text-gray-700 mb-2"
                 >
                   Expiration Date
                 </label>
@@ -91,14 +91,14 @@ const Money = () => {
                   required
                   id="expiration-date"
                   placeholder="MM / YY"
-                  class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500"
+                  className="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500"
                 ></input>
                 <p className="text-red-600">{errorMessage2}</p>
               </div>
-              <div class="col-span-2 sm:col-span-1">
+              <div className="col-span-2 sm:col-span-1">
                 <label
-                  for="cvv"
-                  class="block text-sm font-medium text-gray-700 mb-2"
+                  htmlFor="cvv"
+                  className="block text-sm font-medium text-gray-700 mb-2"
                 >
                   CVV
                 </label>
@@ -108,14 +108,14 @@ const Money = () => {
                   required
                   id="cvv"
                   placeholder="000"
-                  class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500"
+                  className="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500"
                 ></input>
                 <p className="text-red-600">{errorMessage3}</p>
               </div>
-              <div class="col-span-2 sm:col-span-1">
+              <div className="col-span-2 sm:col-span-1">
                 <label
-                  for="card-holder"
-                  class="block text-sm font-medium text-gray-700 mb-2"
+                  htmlFor="card-holder"
+                  className="block text-sm font-medium text-gray-700 mb-2"
                 >
                   Card Holder
                 </label>
@@ -125,15 +125,15 @@ const Money = () => {
                   required
                   id="card-holder"
                   placeholder="Full Name"
-                  class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500"
+                  className="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500"
                 ></input>
                 <p className="text-red-600">{errorMessage4}</p>
               </div>
             </div>
-            <div class="mt-8">
+            <div className="mt-8">
               <button
                 type="submit"
-                class="w-full btn hover:scale-105 ease-in-out duration-300 bg-green-500 hover:bg-blue-600 text-white font-base rounded-lg focus:outline-none"
+                className="w-full btn hover:scale-105 ease-in-out duration-300 bg-green-500 hover:bg-blue-600 text-white font-base rounded-lg focus:outline-none"
               >
                 Submit
               </button>

@@ -58,10 +58,8 @@ export function TestimonialCard({ service2 }) {
               </div>
             </CardHeader>
             <CardBody className="mb-6 p-0">
-              <Typography className="">
-                <p className=" whitespace-nowrap overflow-hidden text-ellipsis break-words w-72">
-                  {item?.reviewText}
-                </p>
+              <Typography className="whitespace-nowrap overflow-hidden text-ellipsis break-words w-72">
+                {item?.reviewText}
               </Typography>
             </CardBody>
           </Card>

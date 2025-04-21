@@ -14,6 +14,7 @@ export const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
 import { useRef } from 'react';
 import axios from "axios";
+import Loading from "../loader/Loading";
 
 const ContextProvider = ({ children }) => {
 
@@ -22,8 +23,28 @@ const ContextProvider = ({ children }) => {
   const [viewWallet, setViewWallet] = useState(false);
   const [viewProfile, setVieProfile] = useState(true);
   const [viewSetting, setViewSetting] = useState(false);
+  const [service, setService] = useState([])
+  const [service2, setService2] = useState([])
   const [loader, setLoader] = useState(true)
   const myRef = useRef(null)
+
+
+  useEffect(() => {
+    axios
+      .get("https://service-web-server.vercel.app/allService")
+      .then((response) => {
+        setService(response.data.sort(() => Math.random() - 0.5).slice(0, 12));
+        const data2 = response.data
+          .map((item) => item?.reviews?.find((item2) => item2?.userName))
+          ?.filter(Boolean);
+
+        setService2(data2);
+        setLoader(false)
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
 
   // register or create account
@@ -99,11 +120,13 @@ const ContextProvider = ({ children }) => {
     viewSetting,
     setViewSetting,
     loader,
-    setLoader
+    setLoader,
+    service2, setService2,
+    service, setService
   };
 
   return (
-    <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={contextData}>{service.length === 0 ? (<Loading/>) : children}</AuthContext.Provider>
   );
 };
 

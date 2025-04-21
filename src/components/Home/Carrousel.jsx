@@ -5,9 +5,9 @@ const Carrousel = () => {
   return (
     <div className="h-[100vh] bg-[#00000079]">
       <Carousel
-        autoplay="true"
+        autoplay={true}
         autoplayDelay={5000}
-        loop="true"
+        loop={true}
         className="relative mix-blend-multiply"
         navigation={({ setActiveIndex, activeIndex, length }) => (
           <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">

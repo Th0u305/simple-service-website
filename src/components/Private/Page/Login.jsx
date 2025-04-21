@@ -30,7 +30,7 @@ const Login = () => {
       .then((result) => {
         setUser(result.user);
         toast.success("Successfully Logged in")
-        navigate(state);
+        navigate(state || "/");
       })
       .catch(() => {
         toast.error("Try Again");
@@ -51,7 +51,7 @@ const Login = () => {
       .then(() => {
         e.target.reset();
         toast.success("Successfully logged in!");
-        navigate(state);
+        navigate(state || "/");
       })
       .catch(() => {
         toast.error("Invalid credentials. Password or Email");
@@ -149,7 +149,7 @@ const Login = () => {
                     className="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
                   <label
-                    for="remember-me"
+                    htmlFor="remember-me"
                     className="ml-3 block text-sm text-gray-800"
                   >
                     Remember me

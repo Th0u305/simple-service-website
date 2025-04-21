@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CiLink } from "react-icons/ci";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { FaUser } from "react-icons/fa";
@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet-async";
 const Register = () => {
   const { createUser, signOutUser, myRef } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -43,7 +44,8 @@ const Register = () => {
       .then(() => {
         e.target.reset();
         signOutUser();
-        navigate("/login");
+        navigate(state || "/login");
+        toast.success("Successfully created account")
       })
       .catch(() => {
         toast.error("This user already exists");

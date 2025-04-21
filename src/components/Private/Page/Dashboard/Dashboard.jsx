@@ -96,7 +96,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex mt-12 mb-12 lg:items-end p-8" ref={myRef}>
+    <div className="flex pt-48 mb-12 lg:items-end p-8" ref={myRef}>
       <Helmet>
         <title>EcoVenture | Dashboard</title>
       </Helmet>
